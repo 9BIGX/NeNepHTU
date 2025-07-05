@@ -13,7 +13,7 @@ export default function ChatPage({ isSidebarOpen, toggleSidebar }) {
     const [selectedUser, setSelectedUser] = useState(users[0]);
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
-
+      
     const handleSend = () => {
         if (newMessage.trim() === '') return;
         setMessages([...messages, { from: 'me', text: newMessage }]);
@@ -27,7 +27,7 @@ export default function ChatPage({ isSidebarOpen, toggleSidebar }) {
                 <div className="flex-1 p-6">
                     <Header Theme={"light"} isOpen={isSidebarOpen} toggleSideBar={toggleSidebar} namePage={"Trang Chu"} />
                     <div className="mt-8 bg-white p-5 rounded-lg shadow">
-                        {/* viết ở đây */}
+                        
                     </div>
                 </div>
             </div>

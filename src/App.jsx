@@ -17,15 +17,15 @@ function App() {
   };
   const router = createBrowserRouter([
     {
-      path: "/",
+      path: "/NeNepHTU/",
       element: <MainPage isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />,
     },
     {
-      path: "/Work",
+      path: "/NeNepHTU/Work",
       element: <WorkPage isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />,
     },
     {
-      path: "/Chat",
+      path: "/NeNepHTU/Chat",
       element: <ChatPage isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />,
     },
     {
