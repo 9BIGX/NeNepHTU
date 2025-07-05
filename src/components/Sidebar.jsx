@@ -14,7 +14,7 @@ import {
   MdKeyboardArrowDown
 } from 'react-icons/md';
 import { NavLink , Link } from 'react-router-dom';
-import Logo from '../assets/logo.webp';
+import Logo from '../assets/Logo.webp';
 const menuItems = [
   {
     name: 'Bảng Điều Khiển',
