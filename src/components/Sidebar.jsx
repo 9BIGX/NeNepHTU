@@ -67,7 +67,7 @@ const Sidebar = ({ isOpen , Close}) => {
   if (!isOpen) return null;
 
   return (
-    <div className="w-64 bg-white shadow-lg h-screen overflow-y-auto p-6 flex flex-col "
+    <div className="w-64 bg-white shadow-lg h- overflow-y-auto p-6 flex flex-col "
       
     >
       <div className="flex items-center mb-6 px-3">
@@ -119,7 +119,7 @@ const Sidebar = ({ isOpen , Close}) => {
                 </>
               ) : (
                 // Regular menu item without sub-items
-                <NavLink activeClassName="bg-gray-100"
+                <NavLink
                   to={item.link} 
                   className="flex items-center p-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors duration-200"
                 >

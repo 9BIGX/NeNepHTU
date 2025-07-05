@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import Sidebar from '../components/Sidebar';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 function WorkPage({isSidebarOpen, toggleSidebar}) {
   return (
+    <>  
     <div className="flex bg-gray-100">
       <Sidebar isOpen={isSidebarOpen} Close={toggleSidebar} />
       <div className="flex-1 p-6">
@@ -13,6 +15,8 @@ function WorkPage({isSidebarOpen, toggleSidebar}) {
         </div>
       </div>
     </div>
+    <Footer />
+    </>
   );
 }
 
