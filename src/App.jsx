@@ -1,10 +1,12 @@
-import React, { useState, StrictMode } from 'react';
+import { useState, StrictMode } from 'react';
 import { createBrowserRouter, RouterProvider, Route, Link } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 import MainPage from './Pages/Main';
 import WorkPage from './Pages/Work';
 import ChatPage from './Pages/Chat';
+import VerifyViolatePage from './Pages/VerifyViolate';
+import ViolatePage from './Pages/Violate';
 import NotFound from './404';
 import './App.css';
 import Footer from './components/Footer';
@@ -27,6 +29,14 @@ function App() {
     {
       path: "/NeNepHTU/Chat",
       element: <ChatPage isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />,
+    },
+    {
+      path: "/NeNepHTU/Violate",
+      element: <ViolatePage isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />,
+    },
+    {
+      path: "/NeNepHTU/VerifyViolate",
+      element: <VerifyViolatePage isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />,
     },
     {
       path: "*",

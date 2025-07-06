@@ -15,7 +15,6 @@ function WorkPage({isSidebarOpen, toggleSidebar}) {
         </div>
       </div>
     </div>
-    <Footer />
     </>
   );
 }

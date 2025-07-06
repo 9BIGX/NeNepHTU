@@ -13,6 +13,8 @@ import {
   MdKeyboardArrowUp,
   MdKeyboardArrowDown
 } from 'react-icons/md';
+import { IoWarning } from "react-icons/io5";
+
 import { NavLink , Link } from 'react-router-dom';
 import Logo from '../assets/Logo.webp';
 const menuItems = [
@@ -25,8 +27,16 @@ const menuItems = [
       { name: 'Thống kê / Báo cáo', link: '#' },
     ],
   },
-  { name: 'Quản lý danh mục', icon: MdWork, link: '/NeNepHTU/Work' },
-  { name: 'Nhiệm Vụ', icon: MdAssignment, link: '#' },
+  { name: 'Quản lý danh mục', icon: MdWork, 
+    subItems: [
+      { name: 'Danh Mục', link: '#' },
+      { name: 'Nhóm', link: '#' },
+      { name: 'Người Dùng', link: '#' },
+      { name: 'Phân Quyền', link: '#' },
+    ]
+   },
+  { name: 'Xác minh vi phạm', icon: MdAssignment, link: '/NeNepHTU/VerifyViolate' },
+  { name: 'Ghi nhận vi phạm', icon: MdInbox, link: '/NeNepHTU/Violate' },
   {
     name: 'Chat',
     icon: MdMail,
@@ -34,7 +44,6 @@ const menuItems = [
     badge: 4,
     badgeColor: 'bg-purple-500 text-white',
   },
-  { name: 'Gmail', icon: MdInbox, link: '#' },
   { name: 'Lịch', icon: MdCalendarToday, link: '#' },
   {
     name: 'Cài Đặt', 
@@ -52,6 +61,12 @@ const menuItems = [
       { name: 'Câu Hỏi Thường Gặp', link: '#' },
     ],
   },
+  {
+    name: 'Báo lỗi',
+    icon: MdCampaign,
+    link: '/NeNepHTU/AlertError',
+    badgeColor: 'bg-red-500 text-white',
+  }
 ];
 
 const Sidebar = ({ isOpen , Close}) => {
@@ -67,9 +82,7 @@ const Sidebar = ({ isOpen , Close}) => {
   if (!isOpen) return null;
 
   return (
-    <div className="w-64 bg-white shadow-lg h- overflow-y-auto p-6 flex flex-col "
-      
-    >
+    <div className="w-64 bg-white shadow-lg h-screen overflow-y-auto p-6 flex flex-col "   >
       <div className="flex items-center mb-6 px-3">
         <img src={Logo} alt="Logo" className="w-10 h-10 rounded-full" />
         <span className="text-xl font-semibold ml-8 text-gray-800">Nề Nếp HTU</span>
