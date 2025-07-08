@@ -22,25 +22,25 @@ const menuItems = [
     name: 'Bảng Điều Khiển',
     icon: MdDashboard,
     subItems: [
-      { name: 'Chính', link: '/NeNepHTU/' },
+      { name: 'Chính', link: '/NeNepHTU/Dashboard/Main' },
       { name: 'Phân Tích', link: '#' },
       { name: 'Thống kê / Báo cáo', link: '#' },
     ],
   },
   { name: 'Quản lý danh mục', icon: MdWork, 
     subItems: [
-      { name: 'Danh Mục', link: '#' },
+      { name: 'Danh Mục', link: '/NeNepHTU/Category/StudentCRUD' },
       { name: 'Nhóm', link: '#' },
       { name: 'Người Dùng', link: '#' },
-      { name: 'Phân Quyền', link: '#' },
+      { name: 'Phân Quyền', link: '/NeNepHTU/Category/Roles' },
     ]
    },
-  { name: 'Xác minh vi phạm', icon: MdAssignment, link: '/NeNepHTU/VerifyViolate' },
-  { name: 'Ghi nhận vi phạm', icon: MdInbox, link: '/NeNepHTU/Violate' },
+  { name: 'Xác minh vi phạm', icon: MdAssignment, link: '/NeNepHTU/Pages/VerifyViolate' },
+  { name: 'Ghi nhận vi phạm', icon: MdInbox, link: '/NeNepHTU/Pages/Violate' },
   {
     name: 'Chat',
     icon: MdMail,
-    link: '/NeNepHTU/Chat',
+    link: '/NeNepHTU/Pages/Chat',
     badge: 4,
     badgeColor: 'bg-purple-500 text-white',
   },
@@ -57,8 +57,8 @@ const menuItems = [
     name: 'Tiện Ích',
     icon: MdTune,
     subItems: [
-      { name: 'Trợ Giúp', link: '#' },
-      { name: 'Câu Hỏi Thường Gặp', link: '#' },
+      { name: 'Trợ Giúp', link: '/NeNepHTU/Utilities/Support' },,
+      { name: 'Câu Hỏi Thường Gặp', link: '/NeNepHTU/Utilities/FAQ' },
     ],
   },
   {
@@ -153,7 +153,7 @@ const Sidebar = ({ isOpen , Close}) => {
       {/* More Section */}
       <div className="mt-auto pt-4 border-t border-gray-200">
         <a
-          href="#"
+          href="/NeNepHTU/Utilities/About"
           className="flex items-center p-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors duration-200"
         >
           <MdMoreHoriz className="h-5 w-5 mr-3 text-gray-500" />

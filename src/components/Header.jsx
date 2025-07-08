@@ -8,7 +8,7 @@ import Logo from '../assets/Logo.webp';
 
 export default function Header(props) {
   const { isOpen, toggleSideBar, namePage, Theme } = props;
-  const [Avartar, setAvartar] = useState('avatars/user.jpg');
+  const [Avartar, setAvartar] = useState('../avatars/user.jpg');
   const [Name, setName] = useState("Nguyễn Thị Thuỳ Linh");
   const [Email, setEmail] = useState("ThuyLinh07@gmail.com");
   const [Role, setRole] = useState(0);

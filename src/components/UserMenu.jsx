@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { FaUserEdit, FaSignOutAlt , FaChalkboardTeacher  } from "react-icons/fa";
+import { FaUserEdit, FaSignOutAlt, FaChalkboardTeacher } from "react-icons/fa";
 import { FiSettings } from "react-icons/fi";
 import { IoMdHelpCircleOutline } from "react-icons/io";
 import { PiStudentBold, PiStudentFill } from "react-icons/pi";
@@ -7,12 +7,12 @@ import { MdAdminPanelSettings } from "react-icons/md";
 
 
 export default function UserMenu(props) {
-	const { Avartar, Name, Email , Role } = props
+	const { Avartar, Name, Email, Role } = props
 	const [open, setOpen] = useState(false);
 	const menuRef = useRef(null);
 	const ArrayRole = [
 		<MdAdminPanelSettings className="text-2xl text-gray-600 mr-1" title="Quản trị viên" />,
-		<FaChalkboardTeacher className="text-2xl text-gray-600 mr-1" title="Giáo viên" />, 
+		<FaChalkboardTeacher className="text-2xl text-gray-600 mr-1" title="Giáo viên" />,
 		<PiStudentBold className="text-2xl text-gray-600 mr-1" title="Học sinh" />,
 	];
 
@@ -48,18 +48,22 @@ export default function UserMenu(props) {
 						</div>
 					</div>
 					<ul className="py-2">
-						<li className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
-							<FaUserEdit className="text-gray-600" />
-							Thông tin cá nhân
-						</li>
+						<a href="/NeNepHTU/Account/Profile">
+							<li className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
+								<FaUserEdit className="text-gray-600" />
+								Thông tin cá nhân
+							</li>
+						</a>
 						<li className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
 							<FiSettings className="text-gray-600" />
 							Cài đặt tài khoản
 						</li>
+						<a href="/NeNepHTU/Utilities/Support">
 						<li className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
 							<IoMdHelpCircleOutline className="text-gray-600" />
 							Hỗ trợ
 						</li>
+						</a>
 					</ul>
 					<div className="border-t px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
 						<FaSignOutAlt className="text-red-500" />
