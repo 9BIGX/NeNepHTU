@@ -22,31 +22,33 @@ const menuItems = [
     name: 'Bảng Điều Khiển',
     icon: MdDashboard,
     subItems: [
-      { name: 'Chính', link: '/NeNepHTU/Dashboard/Main' },
+      { name: 'Chính', link: '/Dashboard/Main' },
       { name: 'Phân Tích', link: '#' },
       { name: 'Thống kê / Báo cáo', link: '#' },
     ],
   },
-  { name: 'Quản lý danh mục', icon: MdWork, 
+  {
+    name: 'Quản lý danh mục',
+    icon: MdWork,
     subItems: [
-      { name: 'Danh Mục', link: '/NeNepHTU/Category/StudentCRUD' },
+      { name: 'Danh Mục', link: '/Category/StudentCRUD' },
       { name: 'Nhóm', link: '#' },
       { name: 'Người Dùng', link: '#' },
-      { name: 'Phân Quyền', link: '/NeNepHTU/Category/Roles' },
-    ]
-   },
-  { name: 'Xác minh vi phạm', icon: MdAssignment, link: '/NeNepHTU/Pages/VerifyViolate' },
-  { name: 'Ghi nhận vi phạm', icon: MdInbox, link: '/NeNepHTU/Pages/Violate' },
+      { name: 'Phân Quyền', link: '/Category/Roles' },
+    ],
+  },
+  { name: 'Xác minh vi phạm', icon: MdAssignment, link: '/Pages/VerifyViolate' },
+  { name: 'Ghi nhận vi phạm', icon: MdInbox, link: '/Pages/Violate' },
   {
     name: 'Chat',
     icon: MdMail,
-    link: '/NeNepHTU/Pages/Chat',
+    link: '/Pages/Chat',
     badge: 4,
     badgeColor: 'bg-purple-500 text-white',
   },
   { name: 'Lịch', icon: MdCalendarToday, link: '#' },
   {
-    name: 'Cài Đặt', 
+    name: 'Cài Đặt',
     icon: MdSettings,
     subItems: [
       { name: 'Chung', link: '#' },
@@ -57,17 +59,18 @@ const menuItems = [
     name: 'Tiện Ích',
     icon: MdTune,
     subItems: [
-      { name: 'Trợ Giúp', link: '/NeNepHTU/Utilities/Support' },,
-      { name: 'Câu Hỏi Thường Gặp', link: '/NeNepHTU/Utilities/FAQ' },
+      { name: 'Trợ Giúp', link: '/Utilities/Support' },
+      { name: 'Câu Hỏi Thường Gặp', link: '/Utilities/FAQ' },
     ],
   },
   {
     name: 'Báo lỗi',
     icon: MdCampaign,
-    link: '/NeNepHTU/AlertError',
+    link: '/AlertError', // Nếu chưa có route này, bạn nên thêm
     badgeColor: 'bg-red-500 text-white',
-  }
+  },
 ];
+
 
 const Sidebar = ({ isOpen , Close}) => {
   const [openSubMenus, setOpenSubMenus] = useState({});
@@ -153,7 +156,7 @@ const Sidebar = ({ isOpen , Close}) => {
       {/* More Section */}
       <div className="mt-auto pt-4 border-t border-gray-200">
         <a
-          href="/NeNepHTU/Utilities/About"
+          href="/Utilities/About"
           className="flex items-center p-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors duration-200"
         >
           <MdMoreHoriz className="h-5 w-5 mr-3 text-gray-500" />
