@@ -155,18 +155,18 @@ const Sidebar = ({ isOpen , Close}) => {
 
       {/* More Section */}
       <div className="mt-auto pt-4 border-t border-gray-200">
-        <a
-          href="/Utilities/About"
+        <NavLink
+          to="/Utilities/About"
           className="flex items-center p-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors duration-200"
         >
           <MdMoreHoriz className="h-5 w-5 mr-3 text-gray-500" />
           <span>MORE</span>
-        </a>
+        </NavLink>
         <ul className="pl-10 mt-1 space-y-1">
           <li>
-            <a href="#" className="block p-2 text-sm rounded-lg text-gray-600 hover:bg-gray-50">
+            <NavLink to="#" className="block p-2 text-sm rounded-lg text-gray-600 hover:bg-gray-50">
               Authentication
-            </a>
+            </NavLink>
           </li>
           {/* Add other "More" sub-items here if needed */}
         </ul>
