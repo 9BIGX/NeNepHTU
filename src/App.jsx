@@ -1,5 +1,10 @@
 import { useState, StrictMode } from 'react';
-import { createBrowserRouter, RouterProvider, Route, Link } from 'react-router-dom';
+import {
+  HashRouter,
+  Routes,
+  Route
+} from 'react-router-dom';
+
 import MainPage from './Pages/Main';
 import WorkPage from './Pages/Roles';
 import ChatPage from './Pages/Chat';
@@ -14,64 +19,40 @@ import UserProfilePage from './account/Profile';
 import DisciplineIntroPage from './utilities/Info';
 import './App.css';
 
-
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
-  const router = createBrowserRouter([
-    {
-      path: "/NeNepHTU/Dashboard/Main",
-      element: <MainPage isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />,
-    },
-    {
-      path: "/NeNepHTU/Category/Roles",
-      element: <RolesPage isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />,
-    },
-    {
-      path: "/NeNepHTU/Pages/Chat",
-      element: <ChatPage isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />,
-    },
-    {
-      path: "/NeNepHTU/Pages/Violate",
-      element: <ViolatePage isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />,
-    },
-    {
-      path: "/NeNepHTU/Pages/VerifyViolate",
-      element: <VerifyViolatePage isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />,
-    },
-    {
-      path: "/NeNepHTU/Utilities/Support",
-      element: <SupportPage isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />,
-    },
-    {
-      path: "/NeNepHTU/Utilities/FAQ",
-      element: <FAQPage isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />,
-    },
-    {
-      path: "/NeNepHTU/Category/StudentCRUD",
-      element: <StudentCRUD isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />,
-    },
-    {
-      path: "/NeNepHTU/Account/Profile",
-      element: <UserProfilePage isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />,
-    },
-    {
-      path: "/NeNepHTU/Utilities/About",
-      element: <DisciplineIntroPage isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />,
-    },
-    {
-      path: "*",
-      element: <NotFound />,
-    }
-  ]);
+  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
   return (
     <StrictMode>
-      <RouterProvider router={router} />
+      <HashRouter>
+        <Routes>
+          <Route path="/Dashboard/Main"
+            element={<MainPage isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />} />
+          <Route path="/Category/Roles"
+            element={<RolesPage isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />} />
+          <Route path="/Pages/Chat"
+            element={<ChatPage isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />} />
+          <Route path="/Pages/Violate"
+            element={<ViolatePage isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />} />
+          <Route path="/Pages/VerifyViolate"
+            element={<VerifyViolatePage isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />} />
+          <Route path="/Utilities/Support"
+            element={<SupportPage isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />} />
+          <Route path="/Utilities/FAQ"
+            element={<FAQPage isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />} />
+          <Route path="/Category/StudentCRUD"
+            element={<StudentCRUD isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />} />
+          <Route path="/Account/Profile"
+            element={<UserProfilePage isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />} />
+          <Route path="/Utilities/About"
+            element={<DisciplineIntroPage isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />} />
+          <Route path="*"
+            element={<NotFound />} />
+        </Routes>
+      </HashRouter>
     </StrictMode>
   );
-};
+}
 
 export default App;
