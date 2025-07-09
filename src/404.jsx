@@ -11,7 +11,7 @@ function NotFound() {
                 Không tìm thấy trang bạn đang tìm kiếm.
             </p>
             
-            <a href="/Dashboard/Main" class="px-5 inline py-3 text-sm font-medium leading-5 shadow-2xl text-white transition-all duration-400 border border-transparent rounded-lg focus:outline-none bg-green-600 active:bg-purple-600 hover:bg-purple-700">Quay về trang chủ</a>
+            <NavLink to="/Dashboard/Main" class="px-5 inline py-3 text-sm font-medium leading-5 shadow-2xl text-white transition-all duration-400 border border-transparent rounded-lg focus:outline-none bg-green-600 active:bg-purple-600 hover:bg-purple-700">Quay về trang chủ</NavLink>
     </div>
         <div class="w-full lg:flex lg:justify-end lg:w-1/2 mx-5 my-12">
         <img src="https://user-images.githubusercontent.com/43953425/166269493-acd08ccb-4df3-4474-95c7-ad1034d3c070.svg" class="" alt="Page not found"/>
