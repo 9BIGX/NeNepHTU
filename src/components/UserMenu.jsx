@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { NavLink , Link } from 'react-router-dom';
 import { FaUserEdit, FaSignOutAlt, FaChalkboardTeacher } from "react-icons/fa";
 import { FiSettings } from "react-icons/fi";
 import { IoMdHelpCircleOutline } from "react-icons/io";
@@ -48,22 +49,22 @@ export default function UserMenu(props) {
 						</div>
 					</div>
 					<ul className="py-2">
-						<a href="/NeNepHTU/Account/Profile">
+						<NavLink to="/Account/Profile">
 							<li className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
 								<FaUserEdit className="text-gray-600" />
 								Thông tin cá nhân
 							</li>
-						</a>
+						</NavLink>
 						<li className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
 							<FiSettings className="text-gray-600" />
 							Cài đặt tài khoản
 						</li>
-						<a href="/NeNepHTU/Utilities/Support">
+						<NavLink to="/Utilities/Support">
 						<li className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
 							<IoMdHelpCircleOutline className="text-gray-600" />
 							Hỗ trợ
 						</li>
-						</a>
+						</NavLink>
 					</ul>
 					<div className="border-t px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
 						<FaSignOutAlt className="text-red-500" />

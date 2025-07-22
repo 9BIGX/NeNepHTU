@@ -24,7 +24,7 @@ const menuItems = [
     subItems: [
       { name: 'Chính', link: '/Dashboard/Main' },
       { name: 'Phân Tích', link: '#' },
-      { name: 'Thống kê / Báo cáo', link: '#' },
+      { name: 'Thống kê / Báo cáo', link: '/DashBoard/Statistics' },
     ],
   },
   {
@@ -32,13 +32,17 @@ const menuItems = [
     icon: MdWork,
     subItems: [
       { name: 'Danh Mục', link: '/Category/StudentCRUD' },
-      { name: 'Nhóm', link: '#' },
+      { name: 'Nhóm tiêu chí / thành tích', link: '/Category/Criteria' },
       { name: 'Người Dùng', link: '#' },
       { name: 'Phân Quyền', link: '/Category/Roles' },
     ],
   },
   { name: 'Xác minh vi phạm', icon: MdAssignment, link: '/Pages/VerifyViolate' },
-  { name: 'Ghi nhận vi phạm', icon: MdInbox, link: '/Pages/Violate' },
+  { name: 'Ghi nhận sự vụ', icon: MdInbox,
+    subItems: [
+      { name: 'Vi phạm', link: '/Pages/Violate' },
+      { name: 'Thành tích', link: '#' },
+    ], },
   {
     name: 'Chat',
     icon: MdMail,
@@ -46,7 +50,6 @@ const menuItems = [
     badge: 4,
     badgeColor: 'bg-purple-500 text-white',
   },
-  { name: 'Lịch', icon: MdCalendarToday, link: '#' },
   {
     name: 'Cài Đặt',
     icon: MdSettings,

@@ -1,8 +1,8 @@
 import { React, useState, useEffect } from 'react'
 
 export default function Chart() {
-    const [data, setData] = useState([10, 10, 2, 3, 5, 7, 5]);
-    const [label, setLabel] = useState(["Khối 6", "Khối 7", "Khối 8", "Khối 9", "Khối 10", "Khối 11", "Khối 12"]);
+    const [data, setData] = useState([10, 10, 5]);
+    const [label, setLabel] = useState(["Khối 10", "Khối 11", "Khối 12"]);
 
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);

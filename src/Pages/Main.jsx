@@ -23,7 +23,7 @@ function MainPage({ isSidebarOpen, toggleSidebar }) {
     <div className="flex bg-gray-50">
       <Sidebar isOpen={isSidebarOpen} Close={toggleSidebar} />
       <div className="flex flex-col flex-1 p-2 h-screen">
-        <Header Theme={"light"} isOpen={isSidebarOpen} toggleSideBar={toggleSidebar} namePage={"Trang Chu"} />
+        <Header Theme={"light"} isOpen={isSidebarOpen} toggleSideBar={toggleSidebar} namePage={"Trang Chủ"} />
         <div className="flex flex-col mt-8 bg-gray-100 p-5 rounded-lg shadow overflow-y-auto">
           <div className='flex gap-5'>
             <BoxShowTotal

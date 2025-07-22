@@ -121,26 +121,40 @@ function StudentCRUD({ isSidebarOpen, toggleSidebar }) {
         setData(updatedData);
     };
 
+    const removeAccents = (str) => {
+        return str
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .replace(/đ/g, 'd')
+            .replace(/Đ/g, 'D');
+    };
+
     const filteredStudents = () => {
         const results = [];
+        const searchLower = removeAccents(searchTerm.toLowerCase());
+
         Object.entries(data).forEach(([g, classes]) => {
             Object.entries(classes).forEach(([c, students]) => {
                 const fullClass = `${g}-${c}`;
                 if (filterClass && filterClass !== fullClass) return;
 
                 students.forEach((s, index) => {
-                    const searchLower = searchTerm.toLowerCase();
+                    const nameNoAccent = removeAccents(s.name.toLowerCase());
+                    const idNoAccent = removeAccents(s.id.toLowerCase());
+
                     const matchesSearch =
-                        s.id.toLowerCase().includes(searchLower) ||
-                        s.name.toLowerCase().includes(searchLower);
+                        idNoAccent.includes(searchLower) || nameNoAccent.includes(searchLower);
+
                     if (!searchTerm || matchesSearch) {
                         results.push({ ...s, grade: g, className: c, index });
                     }
                 });
             });
         });
+
         return results;
     };
+
 
 
     return (
@@ -155,7 +169,9 @@ function StudentCRUD({ isSidebarOpen, toggleSidebar }) {
                                 <h2 className="text-2xl font-bold text-purple-700 mb-4">Quản lý học sinh</h2>
 
                                 {/* Form nhập */}
-                                <div className="flex flex-wrap gap-4 mb-4 w-full ">
+                                {isEditing ? (
+                                    <>                                
+                                    <div className="flex flex-wrap gap-4 mb-4 w-full ">
                                     <input
                                         type="text"
                                         placeholder="Khối (VD: 10)"
@@ -196,7 +212,7 @@ function StudentCRUD({ isSidebarOpen, toggleSidebar }) {
                                     />
 
                                 </div>
-                                {isEditing ? (
+                                
                                     <div className="flex items-center justify-center gap-3">
                                         <button
                                             onClick={handleAddOrEdit}
@@ -211,14 +227,8 @@ function StudentCRUD({ isSidebarOpen, toggleSidebar }) {
                                             Huỷ chỉnh sửa
                                         </button>
                                     </div>
-                                ) : (
-                                    <button
-                                        onClick={handleAddOrEdit}
-                                        className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition"
-                                    >
-                                        Thêm học sinh
-                                    </button>
-                                )}
+                                    </>
+                                ) :''}
 
                                 {/* Search */}
                                 <div className="mt-6">
@@ -237,7 +247,7 @@ function StudentCRUD({ isSidebarOpen, toggleSidebar }) {
                                             onChange={(e) => setFilterClass(e.target.value)}
                                             className="border p-2 rounded-md"
                                         >
-                                            <option value="">-- Tất cả lớp --</option>
+                                            <option value="">Tất cả lớp</option>
                                             {getAllClasses().map((cls) => (
                                                 <option key={cls} value={cls}>
                                                     {cls}
@@ -306,7 +316,7 @@ function StudentCRUD({ isSidebarOpen, toggleSidebar }) {
                                                 {Object.entries(classes).map(([c, students]) => (
                                                     <div key={c} className="mb-4 border-t border-gray-300 pt-2">
                                                         <h4 className="font-semibold text-gray-600 mb-3">Lớp {c}</h4>
-                                                        <table className="w-full text-md border">
+                                                        <table className="w-full text-lg border">
                                                             <thead className="bg-gray-200">
                                                                 <tr>
                                                                     <th className="p-2 cursor-pointer" onClick={() => handleSort('id')}>

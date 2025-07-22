@@ -1,5 +1,4 @@
-export default function StudentData() {
-    return {
+const StudentData = {
         '10': {
             '10A2': [
                 { id: 'HS003', name: 'Lê Thị C', score: 85.0 },
@@ -191,5 +190,5 @@ export default function StudentData() {
             ]
         }
     }
-};
+export default StudentData;
 

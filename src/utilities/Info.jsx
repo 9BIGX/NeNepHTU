@@ -64,7 +64,7 @@ const DisciplineIntroPage = ({ isSidebarOpen, toggleSidebar }) => {
                                         <ul>✅ Phiên bản: <strong>v1.0.0</strong></ul>
                                         <ul>✅ Cập nhật gần nhất: 08/07/2025</ul>
                                         <ul>✅ Thêm chức năng sắp xếp, lọc lớp, chỉnh sửa thông tin học sinh.</ul>
-                                        <ul>✅ Sắp tới: Thêm tính năng điểm danh và đánh giá theo tiêu chí mềm.</ul>
+                                        <ul>🕒 Sắp tới: Thêm tính năng điểm danh và đánh giá theo tiêu chí mềm.</ul>
                                     </ul>
                                 </section>
 

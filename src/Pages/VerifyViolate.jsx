@@ -3,93 +3,15 @@ import Sidebar from '../components/Sidebar';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import SummaryCards from '../ui/SumaryCard';
-import EventList from '../ui/EventStudent';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import EventList from '../ui/EventStudent';
+import EventListTest from '../ui/EventStudent_Test';
+import CriteriaAchievementList from '../data/EventList';
 
 function VerifyViolatePage({ isSidebarOpen, toggleSidebar }) {
 
   const [activeTab, setActiveTab] = useState('tatca');
-  const [events, setEvents] = useState([
-    {
-      id: 1,
-      type: 'vi_pham',
-      status: 'da_xac_minh',
-      studentName: 'Nguyễn Văn An',
-      url:"avatars/student.jpg",
-      studentId: 'HS001',
-      studentClass: '10A1',
-      description: 'Đi học muộn 15 phút không có lý do chính đáng',
-      time: '2024-01-15 07:15',
-      points: -2,
-      relatedPerson: 'Bảo vệ Nguyễn Văn D',
-    },
-    {
-      id: 2,
-      type: 'thanh_tich',
-      status: 'da_xac_minh',
-      studentName: 'Trần Thị Bình',
-      url:"avatars/student.jpg",
-      studentId: 'HS002',
-      studentClass: '10A2',
-      description: 'Phát biểu tích cực xây dựng trong giờ học Văn',
-      time: '2024-01-15 08:30',
-      points: 3,
-      relatedPerson: 'GV Nguyễn Thị E',
-    },
-    {
-      id: 3,
-      type: 'vi_pham',
-      status: 'cho_xac_minh',
-      studentName: 'Lê Văn Cường',
-      url:"avatars/student.jpg",
-      studentId: 'HS003',
-      studentClass: '10A1',
-      description: 'Quên phù hiệu học sinh',
-      time: '2024-01-15 09:00',
-      points: -1,
-      relatedPerson: 'GV Nguyễn Thị E',
-    },
-    {
-      id: 4,
-      type: 'vi_pham',
-      status: 'cho_xac_minh',
-      studentName: 'Lê Văn Cường',
-      url:"avatars/student.jpg",
-      studentId: 'HS003',
-      studentClass: '10A1',
-      description: 'Quên phù hiệu học sinh',
-      time: '2024-01-15 09:00',
-      points: -1,
-      relatedPerson: 'GV Nguyễn Thị E',
-    },
-    {
-      id: 5,
-      type: 'thanh_tich',
-      status: 'cho_xac_minh',
-      studentName: 'Lê Văn Cường',
-      url:"avatars/student.jpg",
-      studentId: 'HS003',
-      studentClass: '10A1',
-      description: 'Quên phù hiệu học sinh',
-      time: '2024-01-15 09:00',
-      points: -1,
-      relatedPerson: 'GV Nguyễn Thị E',
-    },
-    {
-      id: 6,
-      type: 'thanh_tich',
-      status: 'cho_xac_minh',
-      studentName: 'Lê Văn Cường',
-      url:"avatars/student.jpg",
-      studentId: 'HS003',
-      studentClass: '10A1',
-      description: 'Quên phù hiệu học sinh',
-      time: '2024-01-15 09:00',
-      points: -1,
-      relatedPerson: 'GV Nguyễn Thị E',
-    }
-  ]);
-
+  const [events, setEvents] = useState(CriteriaAchievementList)
   const [AmountEvent, setAmountEvent] = useState({
     tatca: events.length,
     vi_pham: 0,
@@ -179,7 +101,8 @@ function VerifyViolatePage({ isSidebarOpen, toggleSidebar }) {
               />
             </div>
             <SummaryCards AmountEvent={AmountEvent} />
-            <EventList events={SelectEvent} VerifyCallBack={VerifyViolate} CancelCallBack={CancelViolate} />
+            {/* <EventList events={SelectEvent} VerifyCallBack={VerifyViolate} CancelCallBack={CancelViolate} /> */}
+          <EventListTest events={SelectEvent} setEvents={setEvents} VerifyCallBack={VerifyViolate} CancelCallBack={CancelViolate} />
           </div>
         </div>
       </div>
