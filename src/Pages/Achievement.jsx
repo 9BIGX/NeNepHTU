@@ -10,8 +10,8 @@ import { ImFilePicture } from "react-icons/im";
 import { MdOutlineTextFields } from "react-icons/md";
 
 
-function ViolatePage({ isSidebarOpen, toggleSidebar }) {
-    const [LevelViolate, setLevelViolet] = useState(['Nhẹ', 'Trung Bình', 'Nặng', 'Rất Nặng']);
+function AchievementPage({ isSidebarOpen, toggleSidebar }) {
+    const [LevelViolate, setLevelViolet] = useState(['Cá nhân','Lớp','Trường','Khu vực', 'Toàn trường']);
     const [TypeViolate, setTypeViolet] = useState(['Điện', 'Nước', 'Khác']);
     const [selectedLevelViolate, setSelectLevelViolate] = useState('');
     const [selectedTypeViolate, setSelectTypeViolate] = useState('');
@@ -43,7 +43,7 @@ function ViolatePage({ isSidebarOpen, toggleSidebar }) {
             <div className="flex bg-gray-50">
                 <Sidebar isOpen={isSidebarOpen} Close={toggleSidebar} />
                 <div className="flex flex-col flex-1 p-2 h-screen">
-                    <Header Theme={"light"} isOpen={isSidebarOpen} toggleSideBar={toggleSidebar} namePage={"Ghi nhận Vi Phạm"} />
+                    <Header Theme={"light"} isOpen={isSidebarOpen} toggleSideBar={toggleSidebar} namePage={"Ghi nhận thành tích"} />
                     <div className="flex flex-col mt-8 bg-gray-100 p-5 rounded-lg shadow overflow-y-auto ">
                         <h1></h1>
                         <form>
@@ -57,38 +57,38 @@ function ViolatePage({ isSidebarOpen, toggleSidebar }) {
                                 </div>
                                 
                                 <div>
-                                    <label htmlFor="LevelViolate" className="block mb-2 text-lg font-medium text-gray-900 ">Muc do vi pham</label>
+                                    <label htmlFor="LevelViolate" className="block mb-2 text-lg font-medium text-gray-900 ">Cấp độ thành tích</label>
                                     <div className='flex relative'>
                                         <IoWarning className='absolute top-1/2 left-2 transform -translate-y-1/2 text-gray-900 text-2xl' />
                                         <select id="LevelViolate" value={selectedLevelViolate}
                                             onChange={handleChange(setSelectLevelViolate)}
                                             className="px-10 bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                                            <option value="">Chọn mức độ</option>
+                                            <option value="">Chọn Cấp độ</option>
                                             {OpTion(LevelViolate)}
                                         </select>
                                     </div>
                                 </div>
                                 <div>
-                                    <label htmlFor="TypeViolate" className="block mb-2 text-lg font-medium text-gray-900 ">Loại vi phạm</label>
+                                    <label htmlFor="TypeViolate" className="block mb-2 text-lg font-medium text-gray-900 ">Loại thành tích</label>
                                     <div className='flex relative'>
                                         <SiAnytype className='absolute top-1/2 left-2 transform -translate-y-1/2 text-gray-900 text-2xl' />
                                         <select id="TypeViolate" value={selectedTypeViolate}
                                             onChange={handleChange(setSelectTypeViolate)}
                                             className="px-10 bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                                            <option value="">Chọn Loại vi phạm</option>
+                                            <option value="">Chọn Loại Thành tích</option>
                                             {OpTion(TypeViolate)}
                                         </select>
                                     </div>
                                 </div>
                                 <div>
-                                    <label htmlFor="date" className="block mb-2 text-lg font-medium text-gray-900 ">Ngày vi phạm ( Tháng / Ngày / Năm )</label>
+                                    <label htmlFor="date" className="block mb-2 text-lg font-medium text-gray-900 ">Ngày thực hiện ( Tháng / Ngày / Năm )</label>
                                     <div className='flex relative'>
                                         <IoCalendarSharp className='absolute top-1/2 left-2 transform -translate-y-1/2 text-gray-900 text-2xl' />
                                         <input type="date" value={dateViolate} onChange={(e) => { setDateViolate(e.target.value) }} id="date" className="px-10 bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Chọn ngày" required />
                                     </div>
                                 </div>
                                 <div >
-                                    <label htmlFor="TitleInfo" className="block mb-2 text-lg font-medium text-gray-900 ">Tiêu đề vi phạm</label>
+                                    <label htmlFor="TitleInfo" className="block mb-2 text-lg font-medium text-gray-900 ">Tiêu đề thành tích </label>
                                     <div className='flex relative'>
                                         <MdOutlineTextFields className='absolute top-1/2 left-2 transform -translate-y-1/2 text-gray-900 text-2xl' />
                                         <input type="text" id="TitleInfo" className="px-10 bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Nhập tiêu đề vi phạm" required />
@@ -105,10 +105,10 @@ function ViolatePage({ isSidebarOpen, toggleSidebar }) {
                                 </div>
                             </div>
                             <div>
-                                <label htmlFor="Description" className="block mb-2 text-lg font-medium text-gray-900 ">Mô tả vi phạm (không bắt buộc)</label>
+                                <label htmlFor="Description" className="block mb-2 text-lg font-medium text-gray-900 ">Mô tả hành động (không bắt buộc)</label>
                                 <div className='flex relative'>
                                     <MdOutlineTextFields className='absolute top-1/6 left-2 transform -translate-y-1/2 text-gray-900 text-2xl' />
-                                    <textarea id="Description" rows="5" className="px-10 bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Nhập mô tả vi phạm"></textarea>
+                                    <textarea id="Description" rows="5" className="px-10 bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Nhập mô tả hành động"></textarea>
                                 </div>
                             </div>
                             <div className='flex justify-center gap-5'>
@@ -123,4 +123,4 @@ function ViolatePage({ isSidebarOpen, toggleSidebar }) {
     );
 }
 
-export default ViolatePage;
+export default AchievementPage;

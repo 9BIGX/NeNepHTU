@@ -6,7 +6,7 @@ import Header from '../components/Header';
 const defaultProfile = {
   id: 'HS12345',
   name: 'Nguyễn Văn A',
-  avatar: '../avatars/user.jpg',
+  avatar: 'avatars/user.jpg',
   email: 'nguyenvana@example.com',
   phone: '0123456789',
   dob: '2008-05-15',
@@ -37,31 +37,30 @@ const UserProfilePage = ({ isSidebarOpen, toggleSidebar }) => {
             <div className=" bg-gray-100 py-10 px-4">
               <div className="max-w-3xl mx-auto bg-white p-6 rounded-xl shadow-md py-10">
                 <div className="flex flex-col md:flex-row gap-6 items-start">
-                  <div className="w-32 h-32 bg-gray-200 rounded-full overflow-hidden m-2">
+                  <div className="flex flex-col gap-5 items-center">
                     {profile.avatar ? (
+                      <>
                       <img
                         src={profile.avatar}
                         alt="avatar"
-                        className="w-full h-full object-cover"
+                        className="w-32 h-32 bg-gray-200 rounded-full object-cover"
                       />
+                      <button className='px-4 py-1 rounded-lg bg-purple-500 text-white' type="button">Đổi ảnh</button>
+                      </>
                     ) : (
                       <div className="flex items-center justify-center w-full h-full text-gray-500">
                         No Image
                       </div>
                     )}
+                    
                   </div>
 
                   <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label className="font-medium">Tên học sinh:</label>
-                      <input
-                        type="text"
-                        name="name"
-                        value={profile.name}
-                        onChange={handleChange}
-                        className="w-full border p-2 rounded-md"
-                        disabled={!isEditing}
-                      />
+                      <p className={`w-full border p-2 rounded-md text-start 
+                        ${isEditing ? 'bg-red-200' : ''}`}>
+                        {profile.name}</p>
                     </div>
 
                     <div>
@@ -107,18 +106,6 @@ const UserProfilePage = ({ isSidebarOpen, toggleSidebar }) => {
                         type="text"
                         name="phone"
                         value={profile.phone}
-                        onChange={handleChange}
-                        className="w-full border p-2 rounded-md"
-                        disabled={!isEditing}
-                      />
-                    </div>
-
-                    <div>
-                      <label className="font-medium">Ngày sinh:</label>
-                      <input
-                        type="date"
-                        name="dob"
-                        value={profile.dob}
                         onChange={handleChange}
                         className="w-full border p-2 rounded-md"
                         disabled={!isEditing}

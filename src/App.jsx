@@ -21,6 +21,7 @@ import UserProfilePage from './account/Profile';
 import DisciplineIntroPage from './utilities/Info';
 import StatisticsPage from './Pages/Statistics';
 import ViolateCRUDPage from './Pages/ViolateCRUD';
+import AchievementPage from './Pages/Achievement';
 import './App.css';
 
 function App() {
@@ -44,6 +45,8 @@ function App() {
             element={<ChatPage isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />} />
           <Route path="/Pages/Violate"
             element={<ViolatePage isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />} />
+          <Route path="/Pages/Achievement"
+            element={<AchievementPage isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />} />
           <Route path="/Pages/VerifyViolate"
             element={<VerifyViolatePage isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />} />
           <Route path="/Utilities/Support"

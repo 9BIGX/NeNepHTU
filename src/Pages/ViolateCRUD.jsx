@@ -137,8 +137,8 @@ const ViolateCRUDPage = ({ isSidebarOpen, toggleSidebar }) => {
         <div className="flex flex-col mt-8 bg-gray-100 p-5 rounded-lg shadow overflow-y-auto ">
 
           <div className=" bg-gray-50 p-6">
-            <div className="max-w-3xl mx-auto bg-white p-6 rounded-xl shadow">
-              <h2 className="text-2xl font-bold text-purple-700 mb-6">Quản lý tiêu chí & thành tích</h2>
+            <div className="max-w-5xl mx-auto bg-white p-6 rounded-xl shadow">
+              <h2 className="text-2xl font-bold text-purple-700 mb-6">Quản lý vi phạm</h2>
 
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
                 <select name="type" value={form.type} onChange={handleChange} className="border p-2 rounded-md w-full">

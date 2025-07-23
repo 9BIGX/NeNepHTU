@@ -104,7 +104,7 @@ const CriteriaAchievementPage = ({ isSidebarOpen, toggleSidebar }) => {
         </thead>
         <tbody>
           {sorted.map((item, index) => (
-            <tr key={index} className="border-t">
+            <tr key={index} className="border-t  hover:bg-gray-200">
               <td className="p-2 text-gray-700">{item.level}</td>
               <td className="p-2 text-gray-800">{item.name}</td>
               <td className="p-2 text-center">{item.point}</td>
@@ -136,7 +136,7 @@ const CriteriaAchievementPage = ({ isSidebarOpen, toggleSidebar }) => {
         <div className="flex flex-col mt-8 bg-gray-100 p-5 rounded-lg shadow overflow-y-auto ">
 
           <div className=" bg-gray-50 p-6">
-            <div className="max-w-3xl mx-auto bg-white p-6 rounded-xl shadow">
+            <div className="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow">
               <h2 className="text-2xl font-bold text-purple-700 mb-6">Quản lý tiêu chí & thành tích</h2>
 
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
