@@ -3,13 +3,13 @@ const ClassPointData = {
         '10A1': {
             TotalPoint: 90,
             TotalStudent: 42,
-            TotalCriteria: 5,
+            TotalCriteria: 7,
             TotalAchievement: 8,
         },
         '10A2': {
-            TotalPoint: 85,
+            TotalPoint: 80,
             TotalStudent: 40,
-            TotalCriteria: 5,
+            TotalCriteria: 9,
             TotalAchievement: 5,
         },
         '10A3': {
@@ -19,9 +19,9 @@ const ClassPointData = {
             TotalAchievement: 7,
         },
         '10A4': {
-            TotalPoint: 82,
+            TotalPoint: 80,
             TotalStudent: 39,
-            TotalCriteria: 5,
+            TotalCriteria: 7,
             TotalAchievement: 4,
         },
         '10A5': {
@@ -35,7 +35,7 @@ const ClassPointData = {
         '11B1': {
             TotalPoint: 89,
             TotalStudent: 38,
-            TotalCriteria: 5,
+            TotalCriteria: 4,
             TotalAchievement: 9,
         },
         '11B2': {
@@ -47,13 +47,13 @@ const ClassPointData = {
         '11B3': {
             TotalPoint: 91,
             TotalStudent: 39,
-            TotalCriteria: 5,
+            TotalCriteria: 8,
             TotalAchievement: 11,
         },
         '11B4': {
             TotalPoint: 87,
             TotalStudent: 36,
-            TotalCriteria: 5,
+            TotalCriteria: 1,
             TotalAchievement: 8,
         },
         '11B5': {
@@ -79,7 +79,7 @@ const ClassPointData = {
         '12C3': {
             TotalPoint: 95,
             TotalStudent: 36,
-            TotalCriteria: 5,
+            TotalCriteria: 7,
             TotalAchievement: 15,
         },
         '12C4': {
@@ -91,7 +91,7 @@ const ClassPointData = {
         '12C5': {
             TotalPoint: 92,
             TotalStudent: 35,
-            TotalCriteria: 5,
+            TotalCriteria: 7,
             TotalAchievement: 13,
         }
     }
