@@ -31,18 +31,19 @@ const menuItems = [
     name: 'Quản lý danh mục',
     icon: MdWork,
     subItems: [
-      { name: 'Danh Mục', link: '/Category/StudentCRUD' },
+      { name: 'Danh mục học sinh', link: '/Category/StudentCRUD' },
       { name: 'Nhóm tiêu chí / thành tích', link: '/Category/Criteria' },
-      { name: 'Người Dùng', link: '#' },
+      { name: 'Nhóm vi phạm', link: '/Category/Violate' },
       { name: 'Phân Quyền', link: '/Category/Roles' },
     ],
   },
-  { name: 'Xác minh vi phạm', icon: MdAssignment, link: '/Pages/VerifyViolate' },
   { name: 'Ghi nhận sự vụ', icon: MdInbox,
     subItems: [
       { name: 'Vi phạm', link: '/Pages/Violate' },
       { name: 'Thành tích', link: '#' },
-    ], },
+    ], 
+  },
+  { name: 'Xác minh sự vụ', icon: MdAssignment, link: '/Pages/VerifyViolate' },
   {
     name: 'Chat',
     icon: MdMail,

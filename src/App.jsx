@@ -20,6 +20,7 @@ import RolesPage from './Pages/Roles';
 import UserProfilePage from './account/Profile';
 import DisciplineIntroPage from './utilities/Info';
 import StatisticsPage from './Pages/Statistics';
+import ViolateCRUDPage from './Pages/ViolateCRUD';
 import './App.css';
 
 function App() {
@@ -37,6 +38,8 @@ function App() {
             element={<StatisticsPage isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />} />
           <Route path="/Category/Roles"
             element={<RolesPage isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />} />
+          <Route path="/Category/Violate"
+            element={<ViolateCRUDPage isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />} />
           <Route path="/Pages/Chat"
             element={<ChatPage isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />} />
           <Route path="/Pages/Violate"
