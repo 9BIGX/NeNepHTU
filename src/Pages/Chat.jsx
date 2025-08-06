@@ -50,17 +50,19 @@ export default function ChatPage({ isSidebarOpen, toggleSidebar }) {
 
     return (
         <>
-            <div className="flex bg-gray-100">
+            <div className="flex bg-gray-50">
                 <Sidebar isOpen={isSidebarOpen} Close={toggleSidebar} />
-                <div className="flex-1 p-6">
-                    <Header Theme={"light"} isOpen={isSidebarOpen} toggleSideBar={toggleSidebar} namePage={"Chat / Nhóm Trò Chuyện"} />
-                    <div className=" flex font-sans mt-8 bg-white p-5 rounded-lg shadow">
+                <div className="flex flex-col flex-1 p-2 h-screen">
+                    <Header Theme={"light"} isOpen={isSidebarOpen} toggleSideBar={toggleSidebar} namePage={""} />
+                    <div className="flex flex-col mt-8 bg-gray-100 rounded-lg shadow overflow-y-auto ">                    
+                        <div className=" flex bg-white p-5 rounded-lg shadow">
                         <ChatList
                             chatGroups={chatGroups}
                             onSelect={setSelectedGroup}
                             selectedId={selectedGroup?.id}
                         />
                         <ChatBox selectedGroup={selectedGroup} />
+                    </div>
                     </div>
                 </div>
             </div>

@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Navigate, Route } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
 import Header from '../components/Header';
 import { FaEdit, FaTrash } from 'react-icons/fa';
+import { GiHamburgerMenu } from "react-icons/gi";
 import StudentData from '../data/Student';
+import StudentPopup from '../ui/studentpopup';
+import { useNavigate } from 'react-router-dom';
+import { FaFileImport } from 'react-icons/fa';
+import LoadingPopUp from '../ui/Loading';
 function StudentCRUD({ isSidebarOpen, toggleSidebar }) {
-
-    const [data, setData] = useState(StudentData);
+    const ApiUrl = import.meta.env.VITE_API_URL
+    const [data, setData] = useState([]);
     const [sortConfig, setSortConfig] = useState({ key: '', direction: '' });
     const [filterClass, setFilterClass] = useState('');
     const [grade, setGrade] = useState('');
@@ -15,17 +21,83 @@ function StudentCRUD({ isSidebarOpen, toggleSidebar }) {
     const [score, setScore] = useState('');
     const [isEditing, setIsEditing] = useState(false);
     const [editInfo, setEditInfo] = useState({ grade: '', className: '', index: -1 });
-
     const [searchTerm, setSearchTerm] = useState('');
+    const [showPopup, setShowPopup] = useState(false);
+    const [selectedStudent, setSelectedStudent] = useState(null);
+    const [loading, setLoading] = useState(false); // ตัวแปรโหลด
 
+    useEffect(() => {
+        setLoading(true)
+        const fetchData = async () => {
+            try {
+                const res = await fetch(ApiUrl + '/api/GetStudents', {
+                    method: 'POST',
+                    credentials: 'include', // đoạn này tự động lấy cookie (dành cho web)
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+
+                const result = await res.json();
+                setData(result);
+                setLoading(false)
+
+            } catch (error) {
+                console.error("Fetch error:", error);
+            }
+        };
+
+
+        fetchData();
+    }, []);
+    const navigate = useNavigate();
+
+
+    const handleOpenPopup = async (studentIndex) => {
+        const Student = data[studentIndex].MaHS
+        try {
+            const res = await fetch(ApiUrl + '/api/GetStudentInfo', {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ MaHS: Student }),
+            })
+
+            const result = await res.json()
+            setSelectedStudent(result);
+            setShowPopup(true);
+        }
+        catch (err) {
+            console.log('Error', err.message)
+        }
+    };
+
+    const handleEditInfo = (studentData) => {
+        console.log("Chỉnh sửa học sinh:", studentData);
+        // Mở form chỉnh sửa hoặc chuyển trang
+        setShowPopup(false);
+    };
+
+    const saveData = (newForm) => {
+        const newData = newForm
+        const _data = [...data]
+        const index = data.findIndex(studentId => studentId.MaHS === newData.MaHS);
+        if (index !== -1) {
+            _data[index] = newData;
+            setData(_data)
+        }
+
+    }
     const getAllClasses = () => {
-        const result = [];
-        Object.entries(data).forEach(([grade, classes]) => {
-            Object.keys(classes).forEach((className) => {
-                result.push(`${grade}-${className}`); // ví dụ: "10-10A1"
-            });
-        });
-        return result;
+        return Array.from(
+            new Set(
+                data
+                    .filter(s => s.TenKhoi && s.MaLop)
+                    .map(s => `${s.TenKhoi.replace('Khối ', '')}-${s.MaLop}`)
+            )
+        );
     };
 
 
@@ -58,69 +130,6 @@ function StudentCRUD({ isSidebarOpen, toggleSidebar }) {
         return sortConfig.direction === 'asc' ? '▲' : '▼';
     };
 
-
-
-
-    const handleAddOrEdit = () => {
-        if (!grade || !className || !studentId || !studentName) {
-            alert('Vui lòng nhập đầy đủ Khối, Lớp, Mã và Tên học sinh');
-            return;
-        }
-
-        const updatedData = { ...data };
-
-        if (!updatedData[grade]) updatedData[grade] = {};
-        if (!updatedData[grade][className]) updatedData[grade][className] = [];
-
-        const newStudent = {
-            id: studentId,
-            name: studentName,
-            score: parseFloat(score) || 0
-        };
-
-        if (isEditing) {
-            updatedData[editInfo.grade][editInfo.className][editInfo.index] = newStudent;
-            setIsEditing(false);
-        } else {
-            updatedData[grade][className].push(newStudent);
-        }
-
-        setData(updatedData);
-        setGrade('');
-        setClassName('');
-        setStudentId('');
-        setStudentName('');
-        setScore('');
-    };
-
-    const handleCancelEdit = () => {
-        setIsEditing(false);
-        setGrade('');
-        setClassName('');
-        setStudentId('');
-        setStudentName('');
-        setScore('');
-    };
-
-    const handleEdit = (g, c, index) => {
-        const student = data[g][c][index];
-        setStudentId(student.id);
-        setStudentName(student.name);
-        setGrade(g);
-        setClassName(c);
-        setIsEditing(true);
-        setEditInfo({ grade: g, className: c, index });
-        setScore(student.score.toString());
-    };
-
-    const handleDelete = (g, c, index) => {
-        const updatedData = { ...data };
-        updatedData[g][c].splice(index, 1);
-        if (updatedData[g][c].length === 0) delete updatedData[g][c];
-        if (Object.keys(updatedData[g]).length === 0) delete updatedData[g];
-        setData(updatedData);
-    };
-
     const removeAccents = (str) => {
         return str
             .normalize('NFD')
@@ -130,35 +139,93 @@ function StudentCRUD({ isSidebarOpen, toggleSidebar }) {
     };
 
     const filteredStudents = () => {
-        const results = [];
         const searchLower = removeAccents(searchTerm.toLowerCase());
 
-        Object.entries(data).forEach(([g, classes]) => {
-            Object.entries(classes).forEach(([c, students]) => {
-                const fullClass = `${g}-${c}`;
-                if (filterClass && filterClass !== fullClass) return;
+        return data
+            .map((s, index) => ({ ...s, index })) // thêm index cho việc edit/delete
+            .filter((s) => {
+                const fullClass = `${s.TenKhoi.replace('Khối ', '')}-${s.MaLop}`;
+                if (filterClass && filterClass !== fullClass) return false;
 
-                students.forEach((s, index) => {
-                    const nameNoAccent = removeAccents(s.name.toLowerCase());
-                    const idNoAccent = removeAccents(s.id.toLowerCase());
+                const nameNoAccent = removeAccents(s.TenHS.toLowerCase());
+                const idNoAccent = removeAccents(s.MaHS.toLowerCase());
 
-                    const matchesSearch =
-                        idNoAccent.includes(searchLower) || nameNoAccent.includes(searchLower);
+                const matchesSearch =
+                    !searchTerm || idNoAccent.includes(searchLower) || nameNoAccent.includes(searchLower);
 
-                    if (!searchTerm || matchesSearch) {
-                        results.push({ ...s, grade: g, className: c, index });
-                    }
-                });
+                return matchesSearch;
             });
-        });
-
-        return results;
     };
 
 
+    const RenderTable = () => {
+        const grouped = {};
+
+        data.forEach((s, index) => {
+            const khoi = s.TenKhoi;
+            const lop = s.TenLop;
+
+            if (!grouped[khoi]) grouped[khoi] = {};
+            if (!grouped[khoi][lop]) grouped[khoi][lop] = [];
+
+            grouped[khoi][lop].push({ ...s, index });
+        });
+
+
+        if (loading) return(<LoadingPopUp/>)
+
+        return Object.entries(grouped).map(([khoi, classes]) => (
+            <div key={khoi} className="mb-6 p-4 rounded-lg shadow-md border border-gray-300">
+                <h3 className="text-xl font-bold text-gray-700 mb-2">{khoi}</h3>
+                {Object.entries(classes).map(([lop, students]) => (
+                    <div key={lop} className="mb-4 border-t border-gray-300 pt-2">
+                        <h4 className="font-semibold text-gray-600 mb-3">{lop}</h4>
+                        <table className="w-full text-lg border">
+                            <thead className="bg-blue-200 border">
+                                <tr>
+                                    <th className="p-2">Mã</th>
+                                    <th className="p-2">Tên</th>
+                                    <th className="p-2 text-center">Tổng điểm</th>
+                                    <th className="p-2 text-center">Xếp Loại</th>
+                                    <th className="p-2 text-right">Chi tiết</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {students.map((s, i) => (
+                                    <tr key={i} className="border-t">
+                                        <td className="p-2">{s.MaHS}</td>
+                                        <td className="p-2">{s.TenHS}</td>
+                                        <td className="p-2 text-center">{s.TongDiem}</td>
+                                        <td className="p-2 text-center">{s.XepLoai}</td>
+                                        <td className="p-2 text-right space-x-2">
+                                            <button
+                                                onClick={() => handleOpenPopup(s.index)}
+                                                className=" mr-3 text-blue-600 hover:text-blue-800"
+                                                title="Xem thông tin chi tiết"
+                                            >
+                                                <GiHamburgerMenu />
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                ))}
+            </div>
+        ));
+    }
 
     return (
         <>
+            {showPopup && (
+                <StudentPopup
+                    student={selectedStudent}
+                    onClose={() => setShowPopup(false)}
+                    onEdit={handleEditInfo}
+                    onSave={saveData}
+                />
+            )}
             <div className="flex bg-gray-50">
                 <Sidebar isOpen={isSidebarOpen} Close={toggleSidebar} />
                 <div className="flex flex-col flex-1 p-2 h-screen">
@@ -167,69 +234,6 @@ function StudentCRUD({ isSidebarOpen, toggleSidebar }) {
                         <div className="min-h-screen bg-gray-100 p-6">
                             <div className="max-w-5xl mx-auto bg-white rounded-xl shadow-md p-6">
                                 <h2 className="text-2xl font-bold text-purple-700 mb-4">Quản lý học sinh</h2>
-
-                                {/* Form nhập */}
-                                {isEditing ? (
-                                    <>                                
-                                    <div className="flex flex-wrap gap-4 mb-4 w-full ">
-                                    <input
-                                        type="text"
-                                        placeholder="Khối (VD: 10)"
-                                        value={grade}
-                                        onChange={(e) => setGrade(e.target.value)}
-                                        className="border p-2 rounded-md  min-w-40"
-                                    />
-                                    <input
-                                        type="text"
-                                        placeholder="Lớp (VD: 10A1)"
-                                        value={className}
-                                        onChange={(e) => setClassName(e.target.value)}
-                                        className="border p-2 rounded-md  min-w-45"
-                                    />
-                                    <input
-                                        type="text"
-                                        placeholder="Mã học sinh"
-                                        value={studentId}
-                                        onChange={(e) => setStudentId(e.target.value)}
-                                        className="border p-2 rounded-md  min-w-45"
-                                    />
-                                    <input
-                                        type="text"
-                                        placeholder="Tên học sinh"
-                                        value={studentName}
-                                        onChange={(e) => setStudentName(e.target.value)}
-                                        className="border p-2 rounded-md  min-w-45"
-                                    />
-                                    <input
-                                        type="number"
-                                        step="0.1"
-                                        min="0"
-                                        max="100"
-                                        placeholder="Tổng điểm nề nếp"
-                                        value={score || ''}
-                                        onChange={(e) => setScore(e.target.value)}
-                                        className="border p-2 rounded-md  min-w-45"
-                                    />
-
-                                </div>
-                                
-                                    <div className="flex items-center justify-center gap-3">
-                                        <button
-                                            onClick={handleAddOrEdit}
-                                            className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition"
-                                        >
-                                            Cập nhật học sinh
-                                        </button>
-                                        <button
-                                            onClick={handleCancelEdit}
-                                            className="bg-red-400 text-white px-4 py-2 rounded hover:bg-gray-500 transition"
-                                        >
-                                            Huỷ chỉnh sửa
-                                        </button>
-                                    </div>
-                                    </>
-                                ) :''}
-
                                 {/* Search */}
                                 <div className="mt-6">
                                     <input
@@ -240,22 +244,32 @@ function StudentCRUD({ isSidebarOpen, toggleSidebar }) {
                                         value={searchTerm}
                                         onChange={(e) => setSearchTerm(e.target.value)}
                                     />
-                                    <div className="mt-4 flex items-center gap-2">
-                                        <label className="font-semibold">Lọc theo lớp:</label>
-                                        <select
-                                            value={filterClass}
-                                            onChange={(e) => setFilterClass(e.target.value)}
-                                            className="border p-2 rounded-md"
-                                        >
-                                            <option value="">Tất cả lớp</option>
-                                            {getAllClasses().map((cls) => (
-                                                <option key={cls} value={cls}>
-                                                    {cls}
-                                                </option>
-                                            ))}
-                                        </select>
+                                    <div className='flex items-center justify-between '>
+                                        <div className="mt-4 flex items-center gap-2">
+                                            <label className="font-semibold">Lọc theo lớp:</label>
+                                            <select
+                                                value={filterClass}
+                                                onChange={(e) => setFilterClass(e.target.value)}
+                                                className="border p-2 rounded-md"
+                                            >
+                                                <option value="">Tất cả lớp</option>
+                                                {getAllClasses().map((cls) => (
+                                                    <option key={cls} value={cls}>
+                                                        {cls}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </div>
+                                        <div className="flex items-center mt-4 ">
+                                            <button
+                                                onClick={() => navigate('/import')}
+                                                className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 shadow"
+                                            >
+                                                <FaFileImport />
+                                                Import / Cập nhật Danh sách
+                                            </button>
+                                        </div>
                                     </div>
-
                                 </div>
 
                                 {/* Danh sách */}
@@ -264,7 +278,7 @@ function StudentCRUD({ isSidebarOpen, toggleSidebar }) {
                                         <>
                                             <h3 className="text-lg font-bold text-gray-700 mb-2">Kết quả tìm kiếm:</h3>
                                             <table className="w-full text-lg border">
-                                                <thead className="bg-gray-200">
+                                                <thead className="bg-blue-200">
                                                     <tr>
                                                         <th className="p-2 cursor-pointer" onClick={() => handleSort('id')}>
                                                             Mã {renderSortIcon('id')}
@@ -277,31 +291,26 @@ function StudentCRUD({ isSidebarOpen, toggleSidebar }) {
                                                         <th className="p-2 cursor-pointer text-center" onClick={() => handleSort('score')}>
                                                             Tổng điểm {renderSortIcon('score')}
                                                         </th>
+                                                        <th className='p-2'>Xếp loại</th>
                                                         <th className="p-2 text-right">Hành động</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     {getSortedStudents(filteredStudents()).map((s, i) => (
                                                         <tr key={i} className="border-t">
-                                                            <td className="p-2">{s.id}</td>
-                                                            <td className="p-2">{s.name}</td>
-                                                            <td className="p-2">{s.grade}</td>
-                                                            <td className="p-2">{s.className}</td>
-                                                            <td className="p-2 text-center">{s.score}</td>
+                                                            <td className="p-2">{s.MaHS}</td>
+                                                            <td className="p-2">{s.TenHS}</td>
+                                                            <td className="p-2">{s.TenKhoi}</td>
+                                                            <td className="p-2">{s.TenLop}</td>
+                                                            <td className="p-2 text-center">{s.TongDiem}</td>
+                                                            <td className="p-2">{s.XepLoai}</td>
                                                             <td className="p-2 text-right space-x-2">
                                                                 <button
-                                                                    onClick={() => handleEdit(s.grade, s.className, s.index)}
-                                                                    className="text-blue-600 hover:text-blue-800"
-                                                                    title="Sửa"
+                                                                    onClick={() => handleOpenPopup(s.index)}
+                                                                    className=" mr-3 text-blue-600 hover:text-blue-800"
+                                                                    title="Xem thông tin chi tiết"
                                                                 >
-                                                                    <FaEdit />
-                                                                </button>
-                                                                <button
-                                                                    onClick={() => handleDelete(s.grade, s.className, s.index)}
-                                                                    className="text-red-600 hover:text-red-800"
-                                                                    title="Xóa"
-                                                                >
-                                                                    <FaTrash />
+                                                                    <GiHamburgerMenu />
                                                                 </button>
                                                             </td>
                                                         </tr>
@@ -310,59 +319,11 @@ function StudentCRUD({ isSidebarOpen, toggleSidebar }) {
                                             </table>
                                         </>
                                     ) : (
-                                        Object.entries(data).map(([g, classes]) => (
-                                            <div key={g} className="mb-6  p-4 rounded-lg shadow-md border border-gray-300">
-                                                <h3 className="text-xl font-bold text-gray-700 mb-2">Khối {g}</h3>
-                                                {Object.entries(classes).map(([c, students]) => (
-                                                    <div key={c} className="mb-4 border-t border-gray-300 pt-2">
-                                                        <h4 className="font-semibold text-gray-600 mb-3">Lớp {c}</h4>
-                                                        <table className="w-full text-lg border">
-                                                            <thead className="bg-gray-200">
-                                                                <tr>
-                                                                    <th className="p-2 cursor-pointer" onClick={() => handleSort('id')}>
-                                                                        Mã {renderSortIcon('id')}
-                                                                    </th>
-                                                                    <th className="p-2 cursor-pointer" onClick={() => handleSort('name')}>
-                                                                        Tên {renderSortIcon('name')}
-                                                                    </th>
-                                                                    <th className="p-2 cursor-pointer text-center" onClick={() => handleSort('score')}>
-                                                                        Tổng điểm {renderSortIcon('score')}
-                                                                    </th>
-                                                                    <th className="p-2 text-right">Hành động</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                {getSortedStudents(students).map((s, index) => (
-                                                                    <tr key={index} className="border-t">
-                                                                        <td className="p-2">{s.id}</td>
-                                                                        <td className="p-2">{s.name}</td>
-                                                                        <td className="p-2 text-center">{s.score}</td>
-                                                                        <td className="p-2 text-right space-x-2">
-                                                                            <button
-                                                                                onClick={() => handleEdit(g, c, index)}
-                                                                                className="text-blue-600 hover:text-blue-800"
-                                                                                title="Sửa"
-                                                                            >
-                                                                                <FaEdit />
-                                                                            </button>
-                                                                            <button
-                                                                                onClick={() => handleDelete(g, c, index)}
-                                                                                className="text-red-600 hover:text-red-800"
-                                                                                title="Xóa"
-                                                                            >
-                                                                                <FaTrash />
-                                                                            </button>
-                                                                        </td>
-                                                                    </tr>
-                                                                ))}
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        ))
-                                    )}
+                                        RenderTable()
+                                    )
+                                    }
                                 </div>
+
                             </div>
                         </div>
                     </div>

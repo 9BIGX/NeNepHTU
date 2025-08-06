@@ -145,12 +145,12 @@ function FAQPage({ isSidebarOpen, toggleSidebar }) {
                                 />
                             </div>
                             <div className='flex flex-wrap  relative gap-5 w-full'>
-                                <button className={`min-w-45 text-1xl flex gap-3 items-center p-2 px-5 pr-7 bg-pink-300  rounded-2xl shadow-md `}>
+                                <button className={` text-gray-600 min-w-45 text-1xl flex gap-3 items-center p-2 px-5 pr-7 bg-pink-300  rounded-2xl shadow-md `}>
                                         <SiVirustotal className='text-4xl text-pink-500 rounded-lg bg-gray-200/50 p-2'/>
                                         Tất cả
                                     </button>
                                 {faqData.map((Data , index) => (
-                                    <button key={index} className={`min-w-50 text-1xl flex gap-3 items-center p-2 px-5 pr-7 ${Data.color} rounded-2xl shadow-md `}>
+                                    <button key={index} className={` text-gray-600 min-w-50 text-1xl flex gap-3 items-center p-2 px-5 pr-7 ${Data.color} rounded-2xl shadow-md `}>
                                         {Data.icon}
                                         {Data.category}
                                     </button>
@@ -163,7 +163,7 @@ function FAQPage({ isSidebarOpen, toggleSidebar }) {
                                         <div  className={`${Data.color} flex items-center mb-6 p-3 rounded-lg shadow-md`}>
                                             {Data.icon}
                                             <div className="flex-1">
-                                                <h2 className="text-xl font-semibold text-gray-900">{Data.category}</h2>
+                                                <h2 className="text-xl font-semibold text-gray-700">{Data.category}</h2>
                                             </div>
                                             <span className="text-sm text-gray-500">{Data.questions.length} câu hỏi</span>
                                         </div>

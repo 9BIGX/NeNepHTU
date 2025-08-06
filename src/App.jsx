@@ -4,8 +4,9 @@ import {
   Routes,
   Route,
   Navigate,
+  BrowserRouter
 } from 'react-router-dom';
-
+import LoginPage from './Login';
 import MainPage from './Pages/Main';
 import WorkPage from './Pages/Roles';
 import ChatPage from './Pages/Chat';
@@ -22,21 +23,28 @@ import DisciplineIntroPage from './utilities/Info';
 import StatisticsPage from './Pages/Statistics';
 import ViolateCRUDPage from './Pages/ViolateCRUD';
 import AchievementPage from './Pages/Achievement';
+import GradeClassPage from './Pages/GradeClass';
+import ImportExcel from './Pages/ImportPage';
+import LoadingPopUp from './ui/Loading';
 import './App.css';
 
 function App() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
   return (
     <StrictMode>
-      <HashRouter>
+      <BrowserRouter>
         <Routes>
           <Route path="/" element={<Navigate to="/Dashboard/Main" replace />} />
+          <Route path="/Login"
+            element={<LoginPage />} />
           <Route path="/Dashboard/Main"
             element={<MainPage isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />} />
           <Route path="/DashBoard/Statistics"
             element={<StatisticsPage isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />} />
+          <Route path="/Category/Class"
+            element={<GradeClassPage isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />} />
           <Route path="/Category/Roles"
             element={<RolesPage isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />} />
           <Route path="/Category/Violate"
@@ -55,6 +63,8 @@ function App() {
             element={<FAQPage isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />} />
           <Route path="/Category/StudentCRUD"
             element={<StudentCRUD isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />} />
+          <Route path="/import"
+            element={<ImportExcel isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />} />
           <Route path="/Category/Criteria"
             element={<CriteriaAchievementPage isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />} />
           <Route path="/Account/Profile"
@@ -65,7 +75,7 @@ function App() {
           <Route path="*"
             element={<NotFound />} />
         </Routes>
-      </HashRouter>
+      </BrowserRouter>
     </StrictMode>
   );
 }

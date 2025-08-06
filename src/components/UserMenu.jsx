@@ -45,7 +45,6 @@ export default function UserMenu(props) {
 						{ArrayRole[Role]}
 						<div className="ml-3 text-start">
 							<h2 className="font-semibold text-gray-800">{Name}</h2>
-							<p className="text-sm text-gray-500">{Email}</p>
 						</div>
 					</div>
 					<ul className="py-2">
@@ -66,10 +65,12 @@ export default function UserMenu(props) {
 						</li>
 						</NavLink>
 					</ul>
+					<NavLink to="/Login">
 					<div className="border-t px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
 						<FaSignOutAlt className="text-red-500" />
 						<span className="text-red-500 font-medium">Đăng xuất</span>
 					</div>
+					</NavLink>
 				</div>
 			)}
 		</div>

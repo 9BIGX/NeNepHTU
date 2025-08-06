@@ -7,6 +7,7 @@ import { FaPeopleGroup, FaSchool, FaTrophy } from "react-icons/fa6";
 import { IoWarning } from "react-icons/io5";
 import Chart from '../ui/Chart';
 import ClassRankingCard from '../ui/ClassRanking';
+import { AnimatePresence } from 'framer-motion';
 
 function MainPage({ isSidebarOpen, toggleSidebar }) {
   const [TotalStudents, setTotalStudent] = useState(1500);
@@ -22,10 +23,10 @@ function MainPage({ isSidebarOpen, toggleSidebar }) {
   return (
     <div className="flex bg-gray-50">
       <Sidebar isOpen={isSidebarOpen} Close={toggleSidebar} />
-      <div className="flex flex-col flex-1 p-2 h-screen">
+      <div className="flex flex-col flex-1 p-2">
         <Header Theme={"light"} isOpen={isSidebarOpen} toggleSideBar={toggleSidebar} namePage={"Trang Chủ"} />
-        <div className="flex flex-col mt-8 bg-gray-100 p-5 rounded-lg shadow overflow-y-auto">
-          <div className='flex gap-5'>
+        <div className="flex flex-col mt-8 bg-gray-100 p-5 rounded-lg shadow overflow-y-auto ">
+          <div className='grid lg:grid-cols-4 gap-3 grid-cols-2'>
             <BoxShowTotal
               TotalAmount={TotalStudents.toLocaleString()}
               Icon={<FaPeopleGroup className="text-5xl text-green-500 bg-green-100 p-3 rounded-md " />}
@@ -55,7 +56,7 @@ function MainPage({ isSidebarOpen, toggleSidebar }) {
               DesText={"Tuần này"}
             />
           </div>
-          <div className='grid grid-cols-2 gap-1 mt-5'>
+          <div className='grid lg:grid-cols-2 gap-3 mt-5 grid-cols-1'>
             <Chart />
             <ClassRankingCard />
           </div>

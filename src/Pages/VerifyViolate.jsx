@@ -59,7 +59,7 @@ function VerifyViolatePage({ isSidebarOpen, toggleSidebar }) {
     <>
       <div className="flex bg-gray-100">
         <Sidebar isOpen={isSidebarOpen} Close={toggleSidebar} />
-        <div className="flex flex-col flex-1 p-2 h-screen">
+        <div className="flex flex-col flex-1 p-2">
           <Header Theme={"light"} isOpen={isSidebarOpen} toggleSideBar={toggleSidebar} namePage={"Liệt kê / Xác minh vi phạm"} />
           <div className={`flex flex-col mt-8 bg-gray-100 p-5 rounded-lg shadow overflow-y-auto`}>
             <div className='flex justify-around border-b-2 border-gray-400 pb-2'>

@@ -11,6 +11,7 @@ function WorkPage({ isSidebarOpen, toggleSidebar }) {
         <div className="flex flex-col flex-1 p-2 h-screen">
           <Header Theme={"light"} isOpen={isSidebarOpen} toggleSideBar={toggleSidebar} namePage={""} />
           <div className="flex flex-col mt-8 bg-gray-100 p-5 rounded-lg shadow overflow-y-auto ">
+            {/* content */}
           </div>
         </div>
       </div>
