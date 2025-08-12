@@ -57,22 +57,18 @@ export default function Header(props) {
   
 
   return (
-    <header className="w-full shadow-sm bg-white">
-      <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <header className="w-full sticky top-0 z-50 bg-blue-500 text-white">
+      <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-10 h-16 flex items-center justify-between">
         <span onClick={toggleSideBar} className="cursor-pointer">
-          {/* {isOpen ? (
-            <IoIosArrowBack className="text-2xl" />
-          ) : (
-            <GiHamburgerMenu className="text-2xl" />)} */}
-          <GiHamburgerMenu className="text-2xl" />
+          <GiHamburgerMenu className="text-2xl text-white " />
         </span>
         <div>
-          <h1 className="text-2xl font-bold">{namePage}</h1>
+          <h1 className="text-2xl font-bold text-white">{namePage}</h1>
         </div>
 
-        <div className="flex text-center space-x-2 text-sm text-gray-700 items-center">
+        <div className="flex text-center space-x-2 text-sm text-white items-center">
           {Theme === "light" ? (
-            <CiSun className="text-2xl cursor-pointer" />
+            <CiSun className="text-2xl cursor-pointer " />
           ) : (
             <BsFillMoonStarsFill className="text-2xl cursor-pointer" />
           )}

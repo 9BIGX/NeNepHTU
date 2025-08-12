@@ -81,7 +81,7 @@ export default function Chart() {
     }, []);
     return (
         <>
-            <div className="w-full bg-white rounded-lg shadow-sm p-4 md:p-6">
+            <div className="w-full bg-white rounded-2xl shadow-sm p-2 md:p-6">
                 <div className="flex justify-between items-start w-full">
                     <div className="w-full flex justify-around items-center">
                         <h5 className="w-1/2 text-lg font-bold leading-none text-gray-900 me-1 text-start">Chi tiết vi phạm</h5>

@@ -172,46 +172,60 @@ function StudentCRUD({ isSidebarOpen, toggleSidebar }) {
         });
 
 
-        if (loading) return(<LoadingPopUp/>)
+        if (loading) return (<LoadingPopUp />)
 
         return Object.entries(grouped).map(([khoi, classes]) => (
-            <div key={khoi} className="mb-6 p-4 rounded-lg shadow-md border border-gray-300">
-                <h3 className="text-xl font-bold text-gray-700 mb-2">{khoi}</h3>
-                {Object.entries(classes).map(([lop, students]) => (
-                    <div key={lop} className="mb-4 border-t border-gray-300 pt-2">
-                        <h4 className="font-semibold text-gray-600 mb-3">{lop}</h4>
-                        <table className="w-full text-lg border">
-                            <thead className="bg-blue-200 border">
-                                <tr>
-                                    <th className="p-2">Mã</th>
-                                    <th className="p-2">Tên</th>
-                                    <th className="p-2 text-center">Tổng điểm</th>
-                                    <th className="p-2 text-center">Xếp Loại</th>
-                                    <th className="p-2 text-right">Chi tiết</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {students.map((s, i) => (
-                                    <tr key={i} className="border-t">
-                                        <td className="p-2">{s.MaHS}</td>
-                                        <td className="p-2">{s.TenHS}</td>
-                                        <td className="p-2 text-center">{s.TongDiem}</td>
-                                        <td className="p-2 text-center">{s.XepLoai}</td>
-                                        <td className="p-2 text-right space-x-2">
-                                            <button
-                                                onClick={() => handleOpenPopup(s.index)}
-                                                className=" mr-3 text-blue-600 hover:text-blue-800"
-                                                title="Xem thông tin chi tiết"
+            <div key={khoi} className="mb-8">
+                <h3 className="text-2xl font-bold text-gray-800 mb-4">{khoi}</h3>
+                <div className="bg-white rounded-lg shadow-md p-4 border border-gray-200">
+                    {Object.entries(classes).map(([lop, students]) => (
+                        <div key={lop} className="mb-6 last:mb-0">
+                            <h4 className="text-xl font-semibold text-gray-700 mb-2">{lop}</h4>
+                            <div className="overflow-x-auto rounded-lg border border-gray-200">
+                                <table className="min-w-full table-auto text-md">
+                                    <thead className="bg-blue-100 text-gray-600 uppercase">
+                                        <tr>
+                                            <th className="py-3 px-4 text-center">Mã</th>
+                                            <th className="py-3 px-4 text-center">Tên</th>
+                                            <th className="py-3 px-4 text-center">Tổng điểm</th>
+                                            <th className="py-3 px-4 text-center">Xếp Loại</th>
+                                            <th className="py-3 px-4 text-center">Chi tiết</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="text-gray-700">
+                                        {students.map((s, i) => (
+                                            <tr
+                                                key={s.MaHS || i} // Sử dụng MaHS làm key nếu có, nếu không thì dùng index
+                                                className={`border-t border-gray-200 ${i % 2 === 0 ? 'bg-white' : 'bg-gray-50'
+                                                    } hover:bg-gray-200 transition-colors duration-200`}
                                             >
-                                                <GiHamburgerMenu />
-                                            </button>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
-                ))}
+                                                <td className="py-3 px-4 whitespace-nowrap">{s.MaHS}</td>
+                                                <td className="py-3 px-4 whitespace-nowrap">{s.TenHS}</td>
+                                                <td className="py-3 px-4 text-center font-bold text-blue-600">
+                                                    {s.TongDiem}
+                                                </td>
+                                                <td className="py-3 px-4 text-center">
+                                                    <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">
+                                                        {s.XepLoai}
+                                                    </span>
+                                                </td>
+                                                <td className="py-3 px-4 text-center">
+                                                    <button
+                                                        onClick={() => handleOpenPopup(s.index)}
+                                                        className="text-blue-500 hover:text-blue-700 transition-colors duration-200"
+                                                        title="Xem thông tin chi tiết"
+                                                    >
+                                                        <GiHamburgerMenu size={18} />
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    ))}
+                </div>
             </div>
         ));
     }
@@ -226,20 +240,21 @@ function StudentCRUD({ isSidebarOpen, toggleSidebar }) {
                     onSave={saveData}
                 />
             )}
-            <div className="flex bg-gray-50">
+            <div className="flex bg-gradient-to-br from-gray-50 via-blue-50 to-gray-100">
                 <Sidebar isOpen={isSidebarOpen} Close={toggleSidebar} />
-                <div className="flex flex-col flex-1 p-2 h-screen">
+                <div class="absolute w-full bg-blue-500 min-h-85 z-1"></div>
+                <div className="flex flex-col flex-1 z-2">
                     <Header Theme={"light"} isOpen={isSidebarOpen} toggleSideBar={toggleSidebar} namePage={"Danh mục học sinh"} />
-                    <div className="flex flex-col mt-8 bg-gray-100 p-5 rounded-lg shadow overflow-y-auto ">
-                        <div className="min-h-screen bg-gray-100 p-6">
-                            <div className="max-w-5xl mx-auto bg-white rounded-xl shadow-md p-6">
+                    <div className="flex flex-col mt-8 p-5 rounded-lg shadow-md overflow-y-auto ">
+                        <div className="min-h-screen p-4">
+                            <div className="max-w-7xl mx-auto bg-white rounded-2xl p-6">
                                 <h2 className="text-2xl font-bold text-purple-700 mb-4">Quản lý học sinh</h2>
                                 {/* Search */}
                                 <div className="mt-6">
                                     <input
                                         type="text"
                                         placeholder="🔍 Tìm theo tên hoặc mã học sinh..."
-                                        className={`w-full border p-2 rounded-md ${searchTerm || filterClass ? 'border-purple-500 ring-1 ring-purple-300' : ''
+                                        className={`w-full border p-2 rounded-md ${searchTerm || filterClass ? 'border-blue-500 ring-1 ring-blue-300' : ''
                                             }`}
                                         value={searchTerm}
                                         onChange={(e) => setSearchTerm(e.target.value)}
@@ -250,7 +265,7 @@ function StudentCRUD({ isSidebarOpen, toggleSidebar }) {
                                             <select
                                                 value={filterClass}
                                                 onChange={(e) => setFilterClass(e.target.value)}
-                                                className="border p-2 rounded-md"
+                                                className="border p-2 rounded-md bg-white"
                                             >
                                                 <option value="">Tất cả lớp</option>
                                                 {getAllClasses().map((cls) => (
@@ -276,47 +291,59 @@ function StudentCRUD({ isSidebarOpen, toggleSidebar }) {
                                 <div className="mt-6">
                                     {searchTerm || filterClass ? (
                                         <>
-                                            <h3 className="text-lg font-bold text-gray-700 mb-2">Kết quả tìm kiếm:</h3>
-                                            <table className="w-full text-lg border">
-                                                <thead className="bg-blue-200">
-                                                    <tr>
-                                                        <th className="p-2 cursor-pointer" onClick={() => handleSort('id')}>
-                                                            Mã {renderSortIcon('id')}
-                                                        </th>
-                                                        <th className="p-2 cursor-pointer" onClick={() => handleSort('name')}>
-                                                            Tên {renderSortIcon('name')}
-                                                        </th>
-                                                        <th className="p-2">Khối</th>
-                                                        <th className="p-2">Lớp</th>
-                                                        <th className="p-2 cursor-pointer text-center" onClick={() => handleSort('score')}>
-                                                            Tổng điểm {renderSortIcon('score')}
-                                                        </th>
-                                                        <th className='p-2'>Xếp loại</th>
-                                                        <th className="p-2 text-right">Hành động</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {getSortedStudents(filteredStudents()).map((s, i) => (
-                                                        <tr key={i} className="border-t">
-                                                            <td className="p-2">{s.MaHS}</td>
-                                                            <td className="p-2">{s.TenHS}</td>
-                                                            <td className="p-2">{s.TenKhoi}</td>
-                                                            <td className="p-2">{s.TenLop}</td>
-                                                            <td className="p-2 text-center">{s.TongDiem}</td>
-                                                            <td className="p-2">{s.XepLoai}</td>
-                                                            <td className="p-2 text-right space-x-2">
-                                                                <button
-                                                                    onClick={() => handleOpenPopup(s.index)}
-                                                                    className=" mr-3 text-blue-600 hover:text-blue-800"
-                                                                    title="Xem thông tin chi tiết"
+                                            <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                                                <h3 className="text-xl font-bold text-gray-800 mb-4">Kết quả tìm kiếm:</h3>
+                                                <div className="overflow-x-auto rounded-lg border border-gray-200">
+                                                    <table className="min-w-full table-auto text-md">
+                                                        <thead className="bg-blue-100 text-gray-600 uppercase">
+                                                            <tr>
+                                                                <th className="py-3 px-4 text-center cursor-pointer" onClick={() => handleSort('id')}>
+                                                                    Mã {renderSortIcon('id')}
+                                                                </th>
+                                                                <th className="py-3 px-4 text-center cursor-pointer" onClick={() => handleSort('name')}>
+                                                                    Tên {renderSortIcon('name')}
+                                                                </th>
+                                                                <th className="py-3 px-4 text-center">Khối</th>
+                                                                <th className="py-3 px-4 text-center">Lớp</th>
+                                                                <th className="py-3 px-4 text-center cursor-pointer" onClick={() => handleSort('score')}>
+                                                                    Tổng điểm {renderSortIcon('score')}
+                                                                </th>
+                                                                <th className="py-3 px-4 text-center">Xếp loại</th>
+                                                                <th className="py-3 px-4 text-center">Hành động</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody className="text-gray-700">
+                                                            {getSortedStudents(filteredStudents()).map((s, i) => (
+                                                                <tr
+                                                                    key={s.MaHS || i}
+                                                                    className={`border-t border-gray-200 ${i % 2 === 0 ? 'bg-white' : 'bg-gray-50'
+                                                                        } hover:bg-gray-200 transition-colors duration-200`}
                                                                 >
-                                                                    <GiHamburgerMenu />
-                                                                </button>
-                                                            </td>
-                                                        </tr>
-                                                    ))}
-                                                </tbody>
-                                            </table>
+                                                                    <td className="py-3 px-4 whitespace-nowrap">{s.MaHS}</td>
+                                                                    <td className="py-3 px-4 whitespace-nowrap">{s.TenHS}</td>
+                                                                    <td className="py-3 px-4 whitespace-nowrap">{s.TenKhoi}</td>
+                                                                    <td className="py-3 px-4 whitespace-nowrap">{s.TenLop}</td>
+                                                                    <td className="py-3 px-4 text-center font-bold text-blue-600">{s.TongDiem}</td>
+                                                                    <td className="py-3 px-4 whitespace-nowrap">
+                                                                        <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">
+                                                                            {s.XepLoai}
+                                                                        </span>
+                                                                    </td>
+                                                                    <td className="py-3 px-4 text-center">
+                                                                        <button
+                                                                            onClick={() => handleOpenPopup(s.index)}
+                                                                            className="text-blue-500 hover:text-blue-700 transition-colors duration-200"
+                                                                            title="Xem thông tin chi tiết"
+                                                                        >
+                                                                            <GiHamburgerMenu size={18} />
+                                                                        </button>
+                                                                    </td>
+                                                                </tr>
+                                                            ))}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
                                         </>
                                     ) : (
                                         RenderTable()

@@ -10,7 +10,7 @@ function LoginPage({ isSidebarOpen, toggleSidebar }) {
   const ApiUrl = import.meta.env.VITE_API_URL;
   // Handle htmlForm submission
   const handleSubmit = async (e) => {
-    await fetch(ApiUrl+'/api/LoginPc', {
+    await fetch(ApiUrl + '/api/LoginPc', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -34,68 +34,70 @@ function LoginPage({ isSidebarOpen, toggleSidebar }) {
 
   return (
     <>
-      <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8 px-6">
-        <div className="sm:mx-auto sm:w-full sm:max-w-md">
-          <img className="mx-auto h-10 w-auto" src="https://www.svgrepo.com/show/301692/login.svg" alt="Workflow" />
-          <h2 className="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900">
-            Đăng nhập tài khoản
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-gray-100 
+                flex flex-col justify-center py-12 sm:px-6 lg:px-8 px-6">
+
+        {/* Logo */}
+        <div className="sm:mx-auto sm:w-full sm:max-w-md animate-fade-in">
+          <img className="mx-auto h-40 w-auto rounded-2xl transform transition duration-300 hover:scale-105"
+            src="/IconNoBG.png" alt="Workflow" />
+          <h2 className="mt-2 text-center text-3xl font-extrabold text-gray-900 drop-shadow-sm">
+            Hệ thống quản lý nề nếp
           </h2>
-          <p className="mt-2 text-center text-sm leading-5 text-blue-500 max-w">
-            <a href="#"
-              className="font-medium text-blue-500 hover:text-blue-500 focus:outline-none focus:underline transition ease-in-out duration-150">
-              NeNep.HTU.com
-            </a>
+          <p className="mt-2 text-center text-sm text-blue-500">
+            <a href="#" className="hover:underline">Đăng nhập tài khoản</a>
           </p>
         </div>
 
-
-        <div className="mt-8 shadow-md rounded-md  sm:mx-auto sm:w-full sm:max-w-md">
-          <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+        {/* Form */}
+        <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md animate-slide-up">
+          <div className="bg-white py-8 px-6 shadow-lg rounded-xl border border-gray-100 
+                    hover:shadow-blue-200 transition-shadow duration-500">
             <form>
-              <div>
-                <label htmlFor="username" className="block text-sm font-medium leading-5  text-gray-700">Tên đăng nhập / mã học sinh, giảng viên</label>
-                <div className="mt-1 relative rounded-md shadow-sm">
-                  <input id="username" name="username" onChange={(e) => { setUsername(e.target.value) }} placeholder="user / 12345" type="text" required value={username} className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
-                  <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                    <svg className="h-5 w-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd"
-                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
-                        clipRule="evenodd"></path>
-                    </svg>
-                  </div>
-                </div>
+              {/* Username */}
+              <label htmlFor="username" className="block text-sm font-medium text-gray-700">
+                Tên đăng nhập / mã học sinh, giảng viên
+              </label>
+              <div className="mt-1 relative">
+                <input id="username" name="username" placeholder="user / 12345" onChange={(e) => setUsername(e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400
+                            focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400
+                            transition duration-300" />
+                <svg className="h-5 w-5 text-red-500 absolute right-3 top-2 animate-pulse"
+                  fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd"
+                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 
+                  11-2 0 1 1 0 012 0zm-1-9a1 1 0 
+                  00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                    clipRule="evenodd"></path>
+                </svg>
               </div>
 
-              <div className="mt-6">
-                <label htmlFor="password" className="block text-sm font-medium leading-5 text-gray-700">Mật khẩu</label>
-                <div className="mt-1 rounded-md shadow-sm">
-                  <input id="password" name="password" type="password" onChange={(e)=>{setPassword(e.target.value)}} value={password} required className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
-                </div>
+              {/* Password */}
+              <label htmlFor="password" className="mt-6 block text-sm font-medium text-gray-700">
+                Mật khẩu
+              </label>
+              <input id="password" name="password" type="password" placeholder="********" onChange={(e) => setPassword(e.target.value)}
+                className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400
+                          focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400
+                          transition duration-300" />
+
+              {/* Forgot password */}
+              <div className="mt-4 text-right">
+                <a href="#" className="text-blue-500 hover:underline">Quên mật khẩu?</a>
               </div>
 
-              <div className="mt-6 flex items-center justify-between">
-                <div className="flex items-center">
-                  <input id="remember_me" name="remember" type="checkbox" value="1" className="htmlForm-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
-                  <label htmlFor="remember_me" className="ml-2 block text-sm leading-5 text-gray-900">Nhớ tài khoản này</label>
-                </div>
-
-                <div className="text-sm leading-5">
-                  <a href="#"
-                    className="font-medium text-blue-500 hover:text-blue-500 focus:outline-none focus:underline transition ease-in-out duration-150">
-                    Quên mật khẩu ?
-                  </a>
-                </div>
-              </div>
-
-              <div className="mt-6">
-                <span className="block w-full rounded-md shadow-sm">
-                  <button type="button" onClick={() => { handleSubmit(this) }} className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-500 hover:bg-blue-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
-                    Đăng nhập
-                  </button>
-                </span>
-              </div>
+              {/* Button */}
+              <button type="button" onClick={handleSubmit}
+                disabled={!username || !password}
+                className="mt-6 w-full py-2 px-4 text-sm font-semibold rounded-md text-white
+                           bg-gradient-to-r from-blue-500 to-blue-600
+                           hover:from-blue-600 hover:to-blue-700
+                           shadow-md hover:shadow-lg focus:ring-4 focus:ring-blue-200
+                           transform transition-all duration-300 hover:scale-[1.02]">
+                Đăng nhập
+              </button>
             </form>
-
           </div>
         </div>
       </div>

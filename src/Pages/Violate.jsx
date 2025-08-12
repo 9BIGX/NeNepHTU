@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 import { IoCalendarSharp, IoWarning } from "react-icons/io5"
 import { SiAnytype } from "react-icons/si";
 import { MdClass } from "react-icons/md";
-import { IoMdPerson  } from "react-icons/io";
+import { IoMdPerson } from "react-icons/io";
 import { ImFilePicture } from "react-icons/im";
 import { MdOutlineTextFields } from "react-icons/md";
 
@@ -40,9 +40,10 @@ function ViolatePage({ isSidebarOpen, toggleSidebar }) {
 
     return (
         <>
-            <div className="flex bg-gray-50">
+            <div className="flex bg-gradient-to-br from-gray-50 via-blue-50 to-gray-100">
                 <Sidebar isOpen={isSidebarOpen} Close={toggleSidebar} />
-                <div className="flex flex-col flex-1 p-2 h-screen">
+                <div class="absolute w-full bg-blue-500 min-h-85 z-1"></div>
+                <div className="flex flex-col flex-1 z-2">
                     <Header Theme={"light"} isOpen={isSidebarOpen} toggleSideBar={toggleSidebar} namePage={"Ghi nhận Vi Phạm"} />
                     <div className="flex flex-col mt-8 bg-gray-100 p-5 rounded-lg shadow overflow-y-auto ">
                         <h1></h1>
@@ -55,7 +56,7 @@ function ViolatePage({ isSidebarOpen, toggleSidebar }) {
                                         <input type="text" id="StudentCode" className="pl-10 bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="123456789" required />
                                     </div>
                                 </div>
-                                
+
                                 <div>
                                     <label htmlFor="LevelViolate" className="block mb-2 text-lg font-medium text-gray-900 ">Muc do vi pham</label>
                                     <div className='flex relative'>
@@ -99,7 +100,7 @@ function ViolatePage({ isSidebarOpen, toggleSidebar }) {
                                     <label htmlFor="file" className="block mb-2 text-lg font-medium text-gray-900 ">Ảnh xác minh</label>
                                     <div className='flex relative'>
                                         <ImFilePicture className='absolute top-1/2 left-2 transform -translate-y-1/2 text-gray-900 text-2xl' />
-                                        <input type="file" id="file" className="px-10 bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder='asdad'/>
+                                        <input type="file" id="file" className="px-10 bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder='asdad' />
                                         {/* <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Chọn file</button> */}
                                     </div>
                                 </div>

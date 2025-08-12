@@ -29,18 +29,18 @@ export default function UserMenu(props) {
 	}, []);
 
 	return (
-		<div className="relative" ref={menuRef}>
+		<div className="relative " ref={menuRef} >
 			<button onClick={() => setOpen(!open)} className="flex items-center gap-2">
 				<img
 					src={Avartar}
 					alt="Avatar"
 					className="w-10 h-10 rounded-full border-2 border-white shadow object-cover"
 				/>
-				<span className="font-medium text-gray-800 cursor-pointer">{Name}</span>
+				<span className="font-medium text-md cursor-pointer">{Name}</span>
 			</button>
 
 			{open && (
-				<div className="absolute right-0 mt-3 w-64 bg-white rounded-xl shadow-xl border border-gray-200 z-50">
+				<div className="absolute right-0 mt-3 w-64 text-gray-800 bg-white rounded-xl shadow-xl border border-gray-200 z-50">
 					<div className="flex px-4 py-3 border-b items-center">
 						{ArrayRole[Role]}
 						<div className="ml-3 text-start">

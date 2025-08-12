@@ -19,7 +19,7 @@ function StatisticsPage({ isSidebarOpen, toggleSidebar }) {
   const [TotalAchievement, setTotalAchievement] = useState(0);
   const [SelectEvent, setSelectEvent] = useState(events);
 
-  const SetTotalStudent = () =>{
+  const SetTotalStudent = () => {
     for (const grade in AllClassData) {
       const classes = Object.values(AllClassData[grade]);
       const totalStudentsGrade = classes.reduce((total, currentClass) => {
@@ -93,9 +93,10 @@ function StatisticsPage({ isSidebarOpen, toggleSidebar }) {
 
   return (
     <>
-      <div className="flex bg-gray-50">
+      <div className="flex bg-gradient-to-br from-gray-50 via-blue-50 to-gray-100">
         <Sidebar isOpen={isSidebarOpen} Close={toggleSidebar} />
-        <div className="flex flex-col flex-1 p-2 h-screen">
+        <div class="absolute w-full bg-blue-500 min-h-85 z-1"></div>
+        <div className="flex flex-col flex-1 z-2">
           <Header Theme={"light"} isOpen={isSidebarOpen} toggleSideBar={toggleSidebar} namePage={"Thống kê / báo cáo"} />
           <div className="flex flex-col mt-8 bg-gray-100 p-5 rounded-lg shadow overflow-y-auto ">
             <div className='flex justify-around border-b-2 border-gray-400 pb-2'>

@@ -33,7 +33,7 @@ function ClassRankingCard() {
     ];
 
     return (
-        <div className='relative w-full h-full bg-white rounded-lg shadow-md'>
+        <div className='relative w-full h-full bg-white rounded-2xl shadow-md'>
             <div className='flex justify-around items-center w-full h-1/6 mb-5 '>
                 <p className='text-lg text-start bg'>Xếp hạng thi đua</p>
                 <select id="LevelViolate"

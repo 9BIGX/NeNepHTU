@@ -21,12 +21,13 @@ function MainPage({ isSidebarOpen, toggleSidebar }) {
     return percent.toFixed(2);
   }
   return (
-    <div className="flex bg-gray-50">
+    <div className="flex bg-gradient-to-br from-gray-50 via-blue-50 to-gray-100">
       <Sidebar isOpen={isSidebarOpen} Close={toggleSidebar} />
-      <div className="flex flex-col flex-1 p-2">
+      <div class="absolute w-full bg-blue-500 min-h-85 z-1"></div>
+      <div className="flex flex-col flex-1 z-2">
         <Header Theme={"light"} isOpen={isSidebarOpen} toggleSideBar={toggleSidebar} namePage={"Trang Chủ"} />
-        <div className="flex flex-col mt-8 bg-gray-100 p-5 rounded-lg shadow overflow-y-auto ">
-          <div className='grid lg:grid-cols-4 gap-3 grid-cols-2'>
+        <div className="flex flex-col mt-5 p-2 rounded-lg overflow-y-auto ">
+          <div className='grid lg:grid-cols-4 gap-3 grid-cols-2 p-3'>
             <BoxShowTotal
               TotalAmount={TotalStudents.toLocaleString()}
               Icon={<FaPeopleGroup className="text-5xl text-green-500 bg-green-100 p-3 rounded-md " />}
@@ -56,7 +57,7 @@ function MainPage({ isSidebarOpen, toggleSidebar }) {
               DesText={"Tuần này"}
             />
           </div>
-          <div className='grid lg:grid-cols-2 gap-3 mt-5 grid-cols-1'>
+          <div className='grid lg:grid-cols-2 gap-5 mt-0 grid-cols-1 p-3'>
             <Chart />
             <ClassRankingCard />
           </div>

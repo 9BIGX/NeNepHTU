@@ -17,7 +17,6 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { IoWarning } from "react-icons/io5";
 import { motion, AnimatePresence } from "framer-motion";
 import { NavLink, Link } from 'react-router-dom';
-import Logo from '../assets/Logo.webp';
 const menuItems = [
   {
     name: 'Bảng Điều Khiển',
@@ -127,7 +126,7 @@ const Sidebar = ({ isOpen, Close }) => {
             <div className="flex items-center mb-6 px-3 gap-3">
               <GiHamburgerMenu className='text-2xl' onClick={Close} />
               <div className='flex items-center ml-3'>
-                <img src={Logo} alt="Logo" className="w-10 h-10 rounded-full" />
+                <img src='/LogoQLNN.jpg' alt="Logo" className="w-10 h-10 rounded-full" />
                 <span className="text-xl font-semibold ml-3 text-gray-800">Nề Nếp HTU</span>
               </div>
             </div>

@@ -2,7 +2,7 @@ import * as XLSX from "xlsx";
 import React, { useState } from 'react';
 import Sidebar from '../components/Sidebar';
 import Header from '../components/Header';
-const ImportExcel = ({isSidebarOpen , toggleSidebar}) => {
+const ImportExcel = ({ isSidebarOpen, toggleSidebar }) => {
     const [data, setData] = useState([]);
     const [fileName, setFileName] = useState("");
     const [selectedColumns, setSelectedColumns] = useState(
@@ -50,11 +50,12 @@ const ImportExcel = ({isSidebarOpen , toggleSidebar}) => {
     };
 
     return (
-        <div className="flex bg-gray-50">
+        <div className="flex bg-gradient-to-br from-gray-50 via-blue-50 to-gray-100">
             <Sidebar isOpen={isSidebarOpen} Close={toggleSidebar} />
-            <div className="flex flex-col flex-1 p-2 h-screen">
+            <div class="absolute w-full bg-blue-500 min-h-85 z-1"></div>
+            <div className="flex flex-col flex-1 z-2">
                 <Header Theme={"light"} isOpen={isSidebarOpen} toggleSideBar={toggleSidebar} namePage={""} />
-                <div className="flex flex-col mt-8 bg-gray-100 p-5 rounded-lg shadow overflow-y-auto ">
+                <div className="flex flex-col mt-8  p-5 rounded-lg shadow overflow-y-auto ">
                     {/* content */}
 
                     <div className="max-w-full mx-auto p-6 bg-white rounded-xl shadow-md">
@@ -62,7 +63,22 @@ const ImportExcel = ({isSidebarOpen , toggleSidebar}) => {
                             📥 Import học sinh từ Excel
                         </h1>
 
-                        <div className="border-dashed border-2 border-purple-500 rounded-xl p-6 text-center hover:bg-purple-50 transition mb-6">
+                        <div
+                            className="border-dashed border-2 border-purple-500 rounded-xl p-6 text-center hover:bg-purple-50 transition mb-6"
+                            onDragOver={(e) => {
+                                e.preventDefault(); // Ngăn hành vi mặc định của trình duyệt
+                                e.stopPropagation();
+                            }}
+                            onDrop={(e) => {
+                                e.preventDefault(); // Ngăn hành vi mặc định
+                                e.stopPropagation();
+                                const file = e.dataTransfer.files[0];
+                                if (file) {
+                                    // Gọi hàm xử lý file của bạn
+                                    handleFileUpload({ target: { files: [file] } });
+                                }
+                            }}
+                        >
                             <label htmlFor="fileInput" className="cursor-pointer text-purple-600 font-medium">
                                 {fileName ? `📄 ${fileName}` : "Kéo thả hoặc nhấp để chọn file Excel (.xlsx)"}
                             </label>

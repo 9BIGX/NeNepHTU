@@ -57,52 +57,43 @@ function VerifyViolatePage({ isSidebarOpen, toggleSidebar }) {
 
   return (
     <>
-      <div className="flex bg-gray-100">
+      <div className="flex bg-gradient-to-br from-gray-50 via-blue-50 to-gray-100">
         <Sidebar isOpen={isSidebarOpen} Close={toggleSidebar} />
-        <div className="flex flex-col flex-1 p-2">
+        <div class="absolute w-full bg-blue-500 min-h-85 z-1"></div>
+        <div className="flex flex-col flex-1 z-2">
           <Header Theme={"light"} isOpen={isSidebarOpen} toggleSideBar={toggleSidebar} namePage={"Liệt kê / Xác minh vi phạm"} />
-          <div className={`flex flex-col mt-8 bg-gray-100 p-5 rounded-lg shadow overflow-y-auto`}>
-            <div className='flex justify-around border-b-2 border-gray-400 pb-2'>
-              <p
-                onClick={() => setActiveTab('tatca')}
-                className={`cursor-pointer pb-2 ${activeTab === 'tatca' ? 'border-b-2 border-blue-500 font-semibold' : ''
-                  }`}
-              >
-                Tất cả
-              </p>
-              <p
-                onClick={() => setActiveTab('vipham')}
-                className={`cursor-pointer pb-2 ${activeTab === 'vipham' ? 'border-b-2 border-red-500 font-semibold' : ''
-                  }`}
-              >
-                Vi phạm
-              </p>
-              <p
-                onClick={() => setActiveTab('thanhtich')}
-                className={`cursor-pointer pb-2 ${activeTab === 'thanhtich' ? 'border-b-2 border-green-500 font-semibold' : ''
-                  }`}
-              >
-                Thành tích
-              </p>
-              <p
-                onClick={() => setActiveTab('choxacminh')}
-                className={`cursor-pointer pb-2 ${activeTab === 'choxacminh' ? 'border-b-2 border-yellow-500 font-semibold' : ''
-                  }`}
-              >
-                Chờ xác minh
-              </p>
+          <div className={`flex flex-col mt-8 p-5 rounded-lg overflow-y-auto`}>
+            <div className="flex justify-around border-b border-gray-200 pb-2 rounded-t-xl text-white">
+              {[
+                { key: "tatca", label: "Tất cả", color: "border-white" },
+                { key: "vipham", label: "Vi phạm", color: "border-red-600" },
+                { key: "thanhtich", label: "Thành tích", color: "border-green-500" },
+                { key: "choxacminh", label: "Chờ xác minh", color: "border-yellow-500" },
+              ].map(tab => (
+                <p
+                  key={tab.key}
+                  onClick={() => setActiveTab(tab.key)}
+                  className={`cursor-pointer pb-2 px-3 transition-all duration-300 hover:text-gray-100 hover:scale-105 ${activeTab === tab.key
+                      ? `${tab.color} border-b-2 font-semibold text-gray-50`
+                      : ""
+                    }`}
+                >
+                  {tab.label}
+                </p>
+              ))}
             </div>
+
+            {/* Search */}
             <div className="relative mt-8 mb-6">
               <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
               <input
                 type="text"
                 placeholder="Tìm kiếm sự vụ, học sinh..."
-                className="w-full pl-10 pr-4 py-2 rounded-lg bg-white border border-gray-200 focus:outline-none focus:ring-2 focus:ring-red-400"
+                className="w-full pl-10 pr-4 py-2 rounded-lg bg-white border border-gray-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all duration-300"
               />
             </div>
             <SummaryCards AmountEvent={AmountEvent} />
-            {/* <EventList events={SelectEvent} VerifyCallBack={VerifyViolate} CancelCallBack={CancelViolate} /> */}
-          <EventListTest events={SelectEvent} setEvents={setEvents} VerifyCallBack={VerifyViolate} CancelCallBack={CancelViolate} />
+            <EventListTest events={SelectEvent} setEvents={setEvents} VerifyCallBack={VerifyViolate} CancelCallBack={CancelViolate} />
           </div>
         </div>
       </div>
