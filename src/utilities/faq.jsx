@@ -130,9 +130,10 @@ function FAQPage({ isSidebarOpen, toggleSidebar }) {
 
     return (
         <>
-            <div className="flex bg-gray-50">
+            <div className="flex bg-gradient-to-br from-gray-50 via-blue-50 to-gray-100">
                 <Sidebar isOpen={isSidebarOpen} Close={toggleSidebar} />
-                <div className="flex flex-col flex-1 p-2 h-screen">
+                <div class="absolute w-full bg-blue-500 min-h-85 z-1"></div>
+                <div className="flex flex-col flex-1 z-2">
                     <Header Theme={"light"} isOpen={isSidebarOpen} toggleSideBar={toggleSidebar} namePage={"Câu hỏi thường gặp"} />
                     <div className="flex flex-col mt-8 bg-gray-100 p-5 rounded-lg shadow overflow-y-auto">
                         <div>
@@ -146,10 +147,10 @@ function FAQPage({ isSidebarOpen, toggleSidebar }) {
                             </div>
                             <div className='flex flex-wrap  relative gap-5 w-full'>
                                 <button className={` text-gray-600 min-w-45 text-1xl flex gap-3 items-center p-2 px-5 pr-7 bg-pink-300  rounded-2xl shadow-md `}>
-                                        <SiVirustotal className='text-4xl text-pink-500 rounded-lg bg-gray-200/50 p-2'/>
-                                        Tất cả
-                                    </button>
-                                {faqData.map((Data , index) => (
+                                    <SiVirustotal className='text-4xl text-pink-500 rounded-lg bg-gray-200/50 p-2' />
+                                    Tất cả
+                                </button>
+                                {faqData.map((Data, index) => (
                                     <button key={index} className={` text-gray-600 min-w-50 text-1xl flex gap-3 items-center p-2 px-5 pr-7 ${Data.color} rounded-2xl shadow-md `}>
                                         {Data.icon}
                                         {Data.category}
@@ -160,7 +161,7 @@ function FAQPage({ isSidebarOpen, toggleSidebar }) {
                             <div className="flex flex-col max-w-5xl mx-auto bg-gray-50 shadow-md rounded-lg mt-5 gap-5 p-4">
                                 {faqData.map((Data, index) => (
                                     <div key={index} className="p-6 shadow-md border-1 border-gray-200 rounded-lg ">
-                                        <div  className={`${Data.color} flex items-center mb-6 p-3 rounded-lg shadow-md`}>
+                                        <div className={`${Data.color} flex items-center mb-6 p-3 rounded-lg shadow-md`}>
                                             {Data.icon}
                                             <div className="flex-1">
                                                 <h2 className="text-xl font-semibold text-gray-700">{Data.category}</h2>

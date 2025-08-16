@@ -25,7 +25,10 @@ import ViolateCRUDPage from './Pages/ViolateCRUD';
 import AchievementPage from './Pages/Achievement';
 import GradeClassPage from './Pages/GradeClass';
 import ImportExcel from './Pages/ImportPage';
-import LoadingPopUp from './ui/Loading';
+import LocationTable from './Pages/Location';
+import NotificationPage from './Pages/Notification';
+import BugReportPage from './utilities/BugReport';
+
 import './App.css';
 
 function App() {
@@ -45,10 +48,12 @@ function App() {
             element={<StatisticsPage isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />} />
           <Route path="/Category/Class"
             element={<GradeClassPage isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />} />
-          <Route path="/Category/Roles"
-            element={<RolesPage isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />} />
+          <Route path="/Category/Location"
+            element={<LocationTable isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />} />
           <Route path="/Category/Violate"
             element={<ViolateCRUDPage isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />} />
+          <Route path="/Notification"
+            element={<NotificationPage isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />} />
           <Route path="/Pages/Chat"
             element={<ChatPage isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />} />
           <Route path="/Pages/Violate"
@@ -71,7 +76,8 @@ function App() {
             element={<UserProfilePage isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />} />
           <Route path="/Utilities/About"
             element={<DisciplineIntroPage isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />} />
-
+          <Route path="/Utilities/BugReport"
+            element={<BugReportPage isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />} />
           <Route path="*"
             element={<NotFound />} />
         </Routes>

@@ -94,9 +94,10 @@ function SupportPage({ isSidebarOpen, toggleSidebar }) {
 
     return (
         <>
-            <div className="flex bg-gray-50">
+            <div className="flex bg-gradient-to-br from-gray-50 via-blue-50 to-gray-100">
                 <Sidebar isOpen={isSidebarOpen} Close={toggleSidebar} />
-                <div className="flex flex-col flex-1 p-2 h-screen">
+                <div class="absolute w-full bg-blue-500 min-h-85 z-1"></div>
+                <div className="flex flex-col flex-1 z-2">
                     <Header Theme={"light"} isOpen={isSidebarOpen} toggleSideBar={toggleSidebar} namePage={"Liên hệ / hỗ trợ"} />
                     <div className="flex flex-col mt-8 bg-gray-100 p-5 rounded-lg shadow overflow-y-auto">
                         <div className="min-w-200 mx-auto bg-gradient-to-b bg-white p-4 rounded-lg shadow-md">

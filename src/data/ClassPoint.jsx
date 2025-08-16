@@ -1,100 +1,124 @@
-const ClassPointData = {
-    '10': {
-        '10A1': {
-            TotalPoint: 90,
-            TotalStudent: 42,
-            TotalCriteria: 7,
-            TotalAchievement: 8,
-        },
-        '10A2': {
-            TotalPoint: 80,
-            TotalStudent: 40,
-            TotalCriteria: 9,
-            TotalAchievement: 5,
-        },
-        '10A3': {
-            TotalPoint: 88,
-            TotalStudent: 41,
-            TotalCriteria: 5,
-            TotalAchievement: 7,
-        },
-        '10A4': {
-            TotalPoint: 80,
-            TotalStudent: 39,
-            TotalCriteria: 7,
-            TotalAchievement: 4,
-        },
-        '10A5': {
-            TotalPoint: 92,
-            TotalStudent: 43,
-            TotalCriteria: 5,
-            TotalAchievement: 10,
-        }
+const ClassPointData = [
+    {
+        grade: '10',
+        className: '10A1',
+        totalPoint: 90,
+        totalStudent: 42,
+        totalCriteria: 7,
+        totalAchievement: 8,
     },
-    '11': {
-        '11B1': {
-            TotalPoint: 89,
-            TotalStudent: 38,
-            TotalCriteria: 4,
-            TotalAchievement: 9,
-        },
-        '11B2': {
-            TotalPoint: 84,
-            TotalStudent: 37,
-            TotalCriteria: 5,
-            TotalAchievement: 6,
-        },
-        '11B3': {
-            TotalPoint: 91,
-            TotalStudent: 39,
-            TotalCriteria: 8,
-            TotalAchievement: 11,
-        },
-        '11B4': {
-            TotalPoint: 87,
-            TotalStudent: 36,
-            TotalCriteria: 1,
-            TotalAchievement: 8,
-        },
-        '11B5': {
-            TotalPoint: 86,
-            TotalStudent: 38,
-            TotalCriteria: 5,
-            TotalAchievement: 7,
-        }
+    {
+        grade: '10',
+        className: '10A2',
+        totalPoint: 80,
+        totalStudent: 40,
+        totalCriteria: 9,
+        totalAchievement: 5,
     },
-    '12': {
-        '12C1': {
-            TotalPoint: 93,
-            TotalStudent: 35,
-            TotalCriteria: 5,
-            TotalAchievement: 12,
-        },
-        '12C2': {
-            TotalPoint: 88,
-            TotalStudent: 34,
-            TotalCriteria: 5,
-            TotalAchievement: 9,
-        },
-        '12C3': {
-            TotalPoint: 95,
-            TotalStudent: 36,
-            TotalCriteria: 7,
-            TotalAchievement: 15,
-        },
-        '12C4': {
-            TotalPoint: 90,
-            TotalStudent: 33,
-            TotalCriteria: 5,
-            TotalAchievement: 10,
-        },
-        '12C5': {
-            TotalPoint: 92,
-            TotalStudent: 35,
-            TotalCriteria: 7,
-            TotalAchievement: 13,
-        }
+    {
+        grade: '10',
+        className: '10A3',
+        totalPoint: 88,
+        totalStudent: 41,
+        totalCriteria: 5,
+        totalAchievement: 7,
+    },
+    {
+        grade: '10',
+        className: '10A4',
+        totalPoint: 80,
+        totalStudent: 39,
+        totalCriteria: 7,
+        totalAchievement: 4,
+    },
+    {
+        grade: '10',
+        className: '10A5',
+        totalPoint: 92,
+        totalStudent: 43,
+        totalCriteria: 5,
+        totalAchievement: 10,
+    },
+    {
+        grade: '11',
+        className: '11B1',
+        totalPoint: 89,
+        totalStudent: 38,
+        totalCriteria: 4,
+        totalAchievement: 9,
+    },
+    {
+        grade: '11',
+        className: '11B2',
+        totalPoint: 84,
+        totalStudent: 37,
+        totalCriteria: 5,
+        totalAchievement: 6,
+    },
+    {
+        grade: '11',
+        className: '11B3',
+        totalPoint: 91,
+        totalStudent: 39,
+        totalCriteria: 8,
+        totalAchievement: 11,
+    },
+    {
+        grade: '11',
+        className: '11B4',
+        totalPoint: 87,
+        totalStudent: 36,
+        totalCriteria: 1,
+        totalAchievement: 8,
+    },
+    {
+        grade: '11',
+        className: '11B5',
+        totalPoint: 86,
+        totalStudent: 38,
+        totalCriteria: 5,
+        totalAchievement: 7,
+    },
+    {
+        grade: '12',
+        className: '12C1',
+        totalPoint: 93,
+        totalStudent: 35,
+        totalCriteria: 5,
+        totalAchievement: 12,
+    },
+    {
+        grade: '12',
+        className: '12C2',
+        totalPoint: 88,
+        totalStudent: 34,
+        totalCriteria: 5,
+        totalAchievement: 9,
+    },
+    {
+        grade: '12',
+        className: '12C3',
+        totalPoint: 95,
+        totalStudent: 36,
+        totalCriteria: 7,
+        totalAchievement: 15,
+    },
+    {
+        grade: '12',
+        className: '12C4',
+        totalPoint: 90,
+        totalStudent: 33,
+        totalCriteria: 5,
+        totalAchievement: 10,
+    },
+    {
+        grade: '12',
+        className: '12C5',
+        totalPoint: 92,
+        totalStudent: 35,
+        totalCriteria: 7,
+        totalAchievement: 13,
     }
-};
+];
 
 export default ClassPointData;

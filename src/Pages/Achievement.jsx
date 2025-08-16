@@ -2,31 +2,27 @@ import React, { useState, useEffect } from 'react';
 import Sidebar from '../components/Sidebar';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { IoCalendarSharp, IoWarning } from "react-icons/io5"
-import { SiAnytype } from "react-icons/si";
-import { MdClass } from "react-icons/md";
-import { IoMdPerson } from "react-icons/io";
-import { ImFilePicture } from "react-icons/im";
-import { MdOutlineTextFields } from "react-icons/md";
+import { IoMdPerson } from 'react-icons/io';
+import { IoCalendarSharp } from 'react-icons/io5';
+import { FaTrophy, FaLayerGroup, FaImage } from 'react-icons/fa';
+import { MdOutlineTextFields, MdOutlineDescription, MdLocationOn } from 'react-icons/md';
 
 
 function AchievementPage({ isSidebarOpen, toggleSidebar }) {
-    const [LevelViolate, setLevelViolet] = useState(['Cá nhân', 'Lớp', 'Trường', 'Khu vực', 'Toàn trường']);
-    const [TypeViolate, setTypeViolet] = useState(['Điện', 'Nước', 'Khác']);
-    const [selectedLevelViolate, setSelectLevelViolate] = useState('');
-    const [selectedTypeViolate, setSelectTypeViolate] = useState('');
-    const OpTion = (Array) => {
-        return (
-            Array.map((option, index) => (
-                <option key={index} value={option}>
-                    {option}
-                </option>
-            ))
-        )
-    }
-    const handleChange = (CallBack) => (e) => {
-        CallBack(e.target.value);
-    };
+    // Đổi tên biến từ "Violate" thành "Achievement" để rõ ràng hơn
+    const [achievementLevels, setAchievementLevels] = useState(['Cá nhân', 'Lớp', 'Trường', 'Khu vực', 'Toàn trường']);
+    const [achievementTypes, setAchievementTypes] = useState(['Văn hóa', 'Thể thao', 'Nghệ thuật', 'Khác']);
+    const [locations, setLocations] = useState(['Sân bóng', 'Phòng học 101', 'Thư viện']);
+
+    // Đổi tên state để đồng bộ với các biến mới
+    const [selectedLevel, setSelectedLevel] = useState('');
+    const [selectedType, setSelectedType] = useState('');
+    const [selectedLocation, setSelectedLocation] = useState('');
+    const [studentCode, setStudentCode] = useState('');
+    const [otherAchievementType, setOtherAchievementType] = useState('');
+    const [otherLocation, setOtherLocation] = useState('');
+    const [achievementTitle, setAchievementTitle] = useState('');
+    const [achievementDescription, setAchievementDescription] = useState('');
 
     const getTodayVN = () => {
         const now = new Date();
@@ -34,94 +30,220 @@ function AchievementPage({ isSidebarOpen, toggleSidebar }) {
         const localTime = new Date(now.getTime() - offset * 60000);
         return localTime.toISOString().split('T')[0];
     };
+    const [achievementDate, setAchievementDate] = useState(getTodayVN);
 
-    const [dateViolate, setDateViolate] = useState(getTodayVN);
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        alert('Đã lưu thành tích thành công!');
+        // Thêm logic xử lý lưu dữ liệu ở đây
+    };
 
+    const handleReset = () => {
+        setStudentCode('');
+        setSelectedLevel('');
+        setSelectedType('');
+        setSelectedLocation('');
+        setOtherAchievementType('');
+        setOtherLocation('');
+        setAchievementTitle('');
+        setAchievementDescription('');
+        setAchievementDate(getTodayVN());
+    };
+
+    const OpTion = (Array) => {
+        return Array.map((option, index) => (
+            <option key={index} value={option}>
+                {option}
+            </option>
+        ));
+    };
 
     return (
-        <>
-            <div className="flex bg-gradient-to-br from-gray-50 via-blue-50 to-gray-100">
-                <Sidebar isOpen={isSidebarOpen} Close={toggleSidebar} />
-                <div class="absolute w-full bg-blue-500 min-h-85 z-1"></div>
-                <div className="flex flex-col flex-1 z-2">
-                    <Header Theme={"light"} isOpen={isSidebarOpen} toggleSideBar={toggleSidebar} namePage={"Ghi nhận thành tích"} />
-                    <div className="flex flex-col mt-8 bg-gray-100 p-5 rounded-lg shadow overflow-y-auto ">
-                        <h1></h1>
-                        <form>
-                            <div className="grid gap-6 mb-6 md:grid-cols-2">
-                                <div >
-                                    <label htmlFor="StudentCode" className="block mb-2 text-lg font-medium text-gray-900 ">Mã số học sinh</label>
-                                    <div className='flex relative'>
-                                        <IoMdPerson className='absolute top-1/2 left-2 transform -translate-y-1/2 text-gray-900 text-2xl' />
-                                        <input type="text" id="StudentCode" className="pl-10 bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="123456789" required />
+        <div className="flex bg-gray-50 min-h-screen">
+            <Sidebar isOpen={isSidebarOpen} Close={toggleSidebar} />
+            <div class="absolute w-full bg-blue-500 min-h-85 z-1"></div>
+            <div className="flex flex-col flex-1 z-2">
+                <Header Theme={"light"} isOpen={isSidebarOpen} toggleSideBar={toggleSidebar} namePage={"Ghi nhận Thành tích"} />
+                <div className="p-4 md:p-8 flex flex-col items-center">
+                    <div className="w-full max-w-4xl bg-white p-6 md:p-8 rounded-2xl shadow-xl border border-gray-200">
+                        <h2 className="text-3xl font-extrabold text-gray-800 mb-6 text-center">Ghi nhận Thành tích</h2>
+                        <form onSubmit={handleSubmit}>
+                            <div className="grid gap-6 mb-6 lg:grid-cols-2">
+                                {/* Mã số học sinh */}
+                                <div>
+                                    <label htmlFor="studentCode" className="block mb-2 text-sm font-medium text-gray-700">Mã số học sinh</label>
+                                    <div className='relative'>
+                                        <IoMdPerson className='absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-400 text-xl' />
+                                        <input
+                                            type="text"
+                                            id="studentCode"
+                                            value={studentCode}
+                                            onChange={(e) => setStudentCode(e.target.value)}
+                                            className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition duration-200"
+                                            placeholder="Nhập mã số học sinh"
+                                            required
+                                        />
                                     </div>
                                 </div>
-
+                                {/* Cấp độ thành tích */}
                                 <div>
-                                    <label htmlFor="LevelViolate" className="block mb-2 text-lg font-medium text-gray-900 ">Cấp độ thành tích</label>
-                                    <div className='flex relative'>
-                                        <IoWarning className='absolute top-1/2 left-2 transform -translate-y-1/2 text-gray-900 text-2xl' />
-                                        <select id="LevelViolate" value={selectedLevelViolate}
-                                            onChange={handleChange(setSelectLevelViolate)}
-                                            className="px-10 bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                                            <option value="">Chọn Cấp độ</option>
-                                            {OpTion(LevelViolate)}
+                                    <label htmlFor="achievementLevel" className="block mb-2 text-sm font-medium text-gray-700">Cấp độ thành tích</label>
+                                    <div className='relative'>
+                                        <FaLayerGroup className='absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-400 text-xl' />
+                                        <select
+                                            id="achievementLevel"
+                                            value={selectedLevel}
+                                            onChange={(e) => setSelectedLevel(e.target.value)}
+                                            className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition duration-200"
+                                        >
+                                            <option value="">Chọn cấp độ</option>
+                                            {OpTion(achievementLevels)}
                                         </select>
                                     </div>
                                 </div>
+                                {/* Loại thành tích */}
                                 <div>
-                                    <label htmlFor="TypeViolate" className="block mb-2 text-lg font-medium text-gray-900 ">Loại thành tích</label>
-                                    <div className='flex relative'>
-                                        <SiAnytype className='absolute top-1/2 left-2 transform -translate-y-1/2 text-gray-900 text-2xl' />
-                                        <select id="TypeViolate" value={selectedTypeViolate}
-                                            onChange={handleChange(setSelectTypeViolate)}
-                                            className="px-10 bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                                            <option value="">Chọn Loại Thành tích</option>
-                                            {OpTion(TypeViolate)}
+                                    <label htmlFor="achievementType" className="block mb-2 text-sm font-medium text-gray-700">Loại thành tích</label>
+                                    <div className='relative'>
+                                        <FaTrophy className='absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-400 text-xl' />
+                                        <select
+                                            id="achievementType"
+                                            value={selectedType}
+                                            onChange={(e) => setSelectedType(e.target.value)}
+                                            className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition duration-200"
+                                        >
+                                            <option value="">Chọn loại thành tích</option>
+                                            {OpTion(achievementTypes)}
                                         </select>
                                     </div>
                                 </div>
+                                {/* Loại thành tích khác */}
                                 <div>
-                                    <label htmlFor="date" className="block mb-2 text-lg font-medium text-gray-900 ">Ngày thực hiện ( Tháng / Ngày / Năm )</label>
-                                    <div className='flex relative'>
-                                        <IoCalendarSharp className='absolute top-1/2 left-2 transform -translate-y-1/2 text-gray-900 text-2xl' />
-                                        <input type="date" value={dateViolate} onChange={(e) => { setDateViolate(e.target.value) }} id="date" className="px-10 bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Chọn ngày" required />
+                                    <label htmlFor="otherAchievementType" className="block mb-2 text-sm font-medium text-gray-700">Loại thành tích khác</label>
+                                    <div className='relative'>
+                                        <MdOutlineTextFields className='absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-400 text-xl' />
+                                        <input
+                                            type="text"
+                                            id="otherAchievementType"
+                                            value={otherAchievementType}
+                                            onChange={(e) => setOtherAchievementType(e.target.value)}
+                                            className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition duration-200"
+                                            placeholder="Nhập loại thành tích"
+                                            required={selectedType === 'Khác'}
+                                        />
                                     </div>
                                 </div>
-                                <div >
-                                    <label htmlFor="TitleInfo" className="block mb-2 text-lg font-medium text-gray-900 ">Tiêu đề thành tích </label>
-                                    <div className='flex relative'>
-                                        <MdOutlineTextFields className='absolute top-1/2 left-2 transform -translate-y-1/2 text-gray-900 text-2xl' />
-                                        <input type="text" id="TitleInfo" className="px-10 bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Nhập tiêu đề vi phạm" required />
+                                {/* Ngày thực hiện */}
+                                <div>
+                                    <label htmlFor="achievementDate" className="block mb-2 text-sm font-medium text-gray-700">Ngày thực hiện</label>
+                                    <div className='relative'>
+                                        <IoCalendarSharp className='absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-400 text-xl' />
+                                        <input
+                                            type="date"
+                                            value={achievementDate}
+                                            onChange={(e) => setAchievementDate(e.target.value)}
+                                            id="achievementDate"
+                                            className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition duration-200"
+                                            required
+                                        />
                                     </div>
                                 </div>
-                                {/* input file */}
+                                {/* Địa điểm */}
                                 <div>
-                                    <label htmlFor="file" className="block mb-2 text-lg font-medium text-gray-900 ">Ảnh xác minh</label>
-                                    <div className='flex relative'>
-                                        <ImFilePicture className='absolute top-1/2 left-2 transform -translate-y-1/2 text-gray-900 text-2xl' />
-                                        <input type="file" id="file" className="px-10 bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder='asdad' />
-                                        {/* <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Chọn file</button> */}
+                                    <label htmlFor="location" className="block mb-2 text-sm font-medium text-gray-700">Địa điểm</label>
+                                    <div className='relative'>
+                                        <MdLocationOn className='absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-400 text-xl' />
+                                        <select
+                                            id="location"
+                                            value={selectedLocation}
+                                            onChange={(e) => setSelectedLocation(e.target.value)}
+                                            className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition duration-200"
+                                        >
+                                            <option value="">Chọn địa điểm</option>
+                                            {OpTion(locations)}
+                                        </select>
+                                    </div>
+                                </div>
+                                {/* Địa điểm khác */}
+                                <div>
+                                    <label htmlFor="otherLocation" className="block mb-2 text-sm font-medium text-gray-700">Địa điểm khác</label>
+                                    <div className='relative'>
+                                        <MdOutlineTextFields className='absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-400 text-xl' />
+                                        <input
+                                            type="text"
+                                            id="otherLocation"
+                                            value={otherLocation}
+                                            onChange={(e) => setOtherLocation(e.target.value)}
+                                            className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition duration-200"
+                                            placeholder="Nhập địa điểm"
+                                            required={selectedLocation === 'Khác'}
+                                        />
+                                    </div>
+                                </div>
+                                {/* Tiêu đề thành tích */}
+                                <div>
+                                    <label htmlFor="achievementTitle" className="block mb-2 text-sm font-medium text-gray-700">Tiêu đề thành tích</label>
+                                    <div className='relative'>
+                                        <MdOutlineTextFields className='absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-400 text-xl' />
+                                        <input
+                                            type="text"
+                                            id="achievementTitle"
+                                            value={achievementTitle}
+                                            onChange={(e) => setAchievementTitle(e.target.value)}
+                                            className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition duration-200"
+                                            placeholder="Nhập tiêu đề thành tích"
+                                            required
+                                        />
                                     </div>
                                 </div>
                             </div>
-                            <div>
-                                <label htmlFor="Description" className="block mb-2 text-lg font-medium text-gray-900 ">Mô tả hành động (không bắt buộc)</label>
-                                <div className='flex relative'>
-                                    <MdOutlineTextFields className='absolute top-1/6 left-2 transform -translate-y-1/2 text-gray-900 text-2xl' />
-                                    <textarea id="Description" rows="5" className="px-10 bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Nhập mô tả hành động"></textarea>
+                            {/* Mô tả thành tích */}
+                            <div className="mb-6">
+                                <label htmlFor="achievementDescription" className="block mb-2 text-sm font-medium text-gray-700">Mô tả thành tích (không bắt buộc)</label>
+                                <div className='relative'>
+                                    <MdOutlineDescription className='absolute top-3 left-3 text-gray-400 text-xl' />
+                                    <textarea
+                                        id="achievementDescription"
+                                        rows="4"
+                                        value={achievementDescription}
+                                        onChange={(e) => setAchievementDescription(e.target.value)}
+                                        className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition duration-200 resize-none"
+                                        placeholder="Nhập mô tả thành tích chi tiết"
+                                    ></textarea>
                                 </div>
                             </div>
-                            <div className='flex justify-center gap-5'>
-                                <button type="reset" onClick={() => { setDateViolate(new Date().toISOString().split('T')[0]) }} className="mt-10  text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-10 py-2.5 text-center ">Reset</button>
-                                <button type="submit" className="mt-10 text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-10 py-2.5 text-center ">Lưu</button>
+                            {/* Ảnh xác minh */}
+                            <div className="mb-6">
+                                <label htmlFor="file" className="block mb-2 text-sm font-medium text-gray-700">Ảnh xác minh</label>
+                                <div className='relative'>
+                                    <FaImage className='absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-400 text-xl' />
+                                    <input
+                                        type="file"
+                                        id="file"
+                                        className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition duration-200"
+                                    />
+                                </div>
+                            </div>
+                            <div className='flex justify-end gap-4'>
+                                <button
+                                    type="button"
+                                    onClick={handleReset}
+                                    className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-100 transition duration-200 font-medium"
+                                >
+                                    Reset
+                                </button>
+                                <button
+                                    type="submit"
+                                    className="px-6 py-2 bg-purple-600 text-white rounded-lg shadow-md hover:bg-purple-700 transition duration-200 font-medium"
+                                >
+                                    Lưu
+                                </button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     );
 }
-
 export default AchievementPage;

@@ -35,7 +35,7 @@ const menuItems = [
       { name: 'Danh mục học sinh', link: '/Category/StudentCRUD' },
       { name: 'Nhóm tiêu chí / thành tích', link: '/Category/Criteria' },
       { name: 'Nhóm vi phạm', link: '/Category/Violate' },
-      { name: 'Phân Quyền', link: '/Category/Roles' },
+      { name: 'Địa điểm', link: '/Category/Location' },
     ],
   },
   {
@@ -49,7 +49,7 @@ const menuItems = [
   {
     name: 'Thông báo',
     icon: MdCampaign,
-    link: '/Pages/Chat',
+    link: '/Notification',
     badge: 4,
     badgeColor: 'bg-purple-500 text-white',
   },
@@ -79,7 +79,7 @@ const menuItems = [
   {
     name: 'Báo lỗi',
     icon: MdCampaign,
-    link: '/AlertError', // Nếu chưa có route này, bạn nên thêm
+    link: '/Utilities/BugReport', // Nếu chưa có route này, bạn nên thêm
     badgeColor: 'bg-red-500 text-white',
   },
 ];

@@ -1,4 +1,5 @@
 import "./App.css"
+import { NavLink, Link } from 'react-router-dom';
 function NotFound() {
     
     return (
